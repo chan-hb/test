@@ -18,8 +18,8 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         ...req.body,
-        // Enforce 8000 token budget server-side regardless of what client sends
-        max_tokens: 8000
+        // Enforce 12000 token budget server-side regardless of what client sends
+        max_tokens: 12000
       })
     });
 
