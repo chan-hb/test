@@ -441,7 +441,7 @@ Quote the actual offending code exactly as it appears. Give 3-5 findings per cat
     },
     body: JSON.stringify({
       model: "claude-sonnet-4-6",
-      max_tokens: 4000,
+      max_tokens: 8000,
       system: systemPrompt,
       messages: [{ role:"user", content:`Project: ${project}\nOwner: ${owner}\n\n${sourcesBlock}` }]
     })
@@ -457,9 +457,19 @@ Quote the actual offending code exactly as it appears. Give 3-5 findings per cat
     const raw = (data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("");
     if (!raw) { auditResult = fallbackResult(`Empty response from API. stop_reason: ${data.stop_reason||"unknown"}`); renderResults(auditResult); return; }
     try {
-      const s = raw.indexOf("{"), e = raw.lastIndexOf("}");
+      // Strip markdown fences robustly
+      let clean = raw
+        .replace(/^```json\s*/i, "")
+        .replace(/^```\s*/i, "")
+        .replace(/```\s*$/i, "")
+        .trim();
+      // Extract outermost JSON object
+      const s = clean.indexOf("{");
+      const e = clean.lastIndexOf("}");
       if (s < 0 || e < 0) throw new Error("No JSON object found in response");
-      auditResult = JSON.parse(raw.slice(s, e+1));
+      clean = clean.slice(s, e + 1);
+      // Attempt to fix truncated JSON by closing open structures
+      auditResult = safeParseJSON(clean);
     } catch(e) {
       auditResult = fallbackResult(`JSON parse failed: ${e.message}. First 200 chars of response: ${raw.slice(0,200)}`);
     }
@@ -468,6 +478,29 @@ Quote the actual offending code exactly as it appears. Give 3-5 findings per cat
     renderResults(auditResult);
   })
   .catch(err => { clearInterval(msgInterval); auditResult = fallbackResult(`Network error: ${err.message}`); renderResults(auditResult); });
+}
+
+// Attempts to parse JSON, and if truncated, closes open arrays/objects
+function safeParseJSON(str) {
+  // First try clean parse
+  try { return JSON.parse(str); } catch(e) {}
+  // Repair: close any unclosed strings, arrays, objects
+  let repaired = str;
+  // Remove trailing partial property (last incomplete key:value pair)
+  repaired = repaired.replace(/,\s*"[^"]*"\s*:\s*[^,}\]]*$/, "");
+  repaired = repaired.replace(/,\s*"[^"]*"\s*$/, "");
+  // Count and close open brackets
+  let opens = 0, openBrackets = 0;
+  for (const ch of repaired) {
+    if (ch === "{") opens++;
+    else if (ch === "}") opens--;
+    else if (ch === "[") openBrackets++;
+    else if (ch === "]") openBrackets--;
+  }
+  // Close open arrays first, then objects
+  for (let i = 0; i < openBrackets; i++) repaired += "]";
+  for (let i = 0; i < opens; i++) repaired += "}";
+  return JSON.parse(repaired);
 }
 
 function fallbackResult(reason) {
