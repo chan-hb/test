@@ -434,11 +434,10 @@ Verdict: critical fail=FAIL, high fail=CONDITIONAL, all critical+high pass=PASS.
 Score: start 100, deduct critical fail -25, high fail -15, warn -5, medium fail -8.
 Quote the actual offending code exactly as it appears. Give 3-5 findings per category per source.`;
 
-  fetch("https://api.anthropic.com/v1/messages", {
+  fetch("/api/audit", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      "anthropic-dangerous-direct-browser-access": "true"
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       model: "claude-sonnet-4-6",
