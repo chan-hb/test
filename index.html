@@ -382,7 +382,7 @@ async function runAudit() {
     if (!droppedFiles.length) { alert("Please drop at least one file."); return; }
     droppedFiles.forEach(f => {
       const content = droppedContents[f.name] || '';
-      auditSources.push({ type:"file", label:f.name, content:content.slice(0,8000), truncated:content.length>8000 });
+      auditSources.push({ type:"file", label:f.name, content:content.slice(0,12000), truncated:content.length>12000 });
     });
   } else if (activeTab === "url") {
     if (!fetchedURLData) { alert("Please fetch a URL first."); return; }
@@ -404,7 +404,7 @@ async function runAudit() {
   msgInterval = setInterval(() => { i=(i+1)%LOADING_MSGS.length; msgEl.textContent=LOADING_MSGS[i]; }, 1400);
 
   const sourcesBlock = auditSources.map((s,idx) =>
-    `--- SOURCE ${idx+1}: ${s.label} (${s.type})${s.truncated?' [TRUNCATED to 8000 chars]':''} ---\n${s.content}`
+    `--- SOURCE ${idx+1}: ${s.label} (${s.type})${s.truncated?' [TRUNCATED to 12000 chars]':''} ---\n${s.content}`
   ).join("\n\n");
 
   const systemPrompt = `You are a security auditor for Huda Beauty internal tools. Analyse ALL provided sources and return ONLY valid JSON — no markdown, no backticks, no preamble.
@@ -441,7 +441,7 @@ Quote the actual offending code exactly as it appears. Give 3-5 findings per cat
     },
     body: JSON.stringify({
       model: "claude-sonnet-4-6",
-      max_tokens: 8000,
+      max_tokens: 12000,
       system: systemPrompt,
       messages: [{ role:"user", content:`Project: ${project}\nOwner: ${owner}\n\n${sourcesBlock}` }]
     })
