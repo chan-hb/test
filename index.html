@@ -384,35 +384,97 @@ function renderChips() {
 
 // ── URL fetch ─────────────────────────────────────────────────────────────────
 let fetchedURLData = null;
-const SECURITY_HEADERS = ["content-security-policy","strict-transport-security","x-frame-options","x-content-type-options","referrer-policy","permissions-policy"];
+const SECURITY_HEADERS = [
+  "content-security-policy",
+  "strict-transport-security",
+  "x-frame-options",
+  "x-content-type-options",
+  "referrer-policy",
+  "permissions-policy",
+  "x-xss-protection",
+  "cross-origin-embedder-policy",
+  "cross-origin-opener-policy"
+];
 
 async function fetchURL() {
   const url = document.getElementById("url-input").value.trim();
   if (!url) { alert("Please enter a URL."); return; }
+
   const btn = document.getElementById("fetch-btn");
   const status = document.getElementById("url-status");
   btn.disabled = true;
-  status.style.display = "block"; status.className = "url-status loading"; status.textContent = "Fetching page source and headers...";
-  document.getElementById("fetched-preview-box").style.display = "none"; fetchedURLData = null;
+  status.style.display = "block";
+  status.className = "url-status loading";
+  status.textContent = "Fetching page source and headers via server...";
+  document.getElementById("fetched-preview-box").style.display = "none";
+  fetchedURLData = null;
+
   try {
-    const r = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+    const r = await fetch("/api/fetch-url", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url })
+    });
+
     const d = await r.json();
-    const source = d.contents || "";
+
+    if (!r.ok || d.error) {
+      status.className = "url-status err";
+      status.textContent = d.error || `Server error ${r.status}`;
+      btn.disabled = false;
+      return;
+    }
+
+    const source = d.body || "";
+    const rawHeaders = d.securityHeaders || {};
+
+    // Build detected headers map — now using real response headers, not body scraping
     const dh = {};
     SECURITY_HEADERS.forEach(h => {
-      if (h==="content-security-policy") dh[h]=source.toLowerCase().includes("content-security-policy");
-      else if (h==="strict-transport-security") dh[h]=source.toLowerCase().includes("strict-transport-security")||source.toLowerCase().includes("hsts");
-      else if (h==="x-frame-options") dh[h]=source.toLowerCase().includes("x-frame-options");
-      else if (h==="x-content-type-options") dh[h]=source.toLowerCase().includes("nosniff")||source.toLowerCase().includes("x-content-type-options");
-      else dh[h]=false;
+      dh[h] = rawHeaders[h] !== null && rawHeaders[h] !== undefined && rawHeaders[h] !== false;
     });
-    fetchedURLData = { url, source: source.slice(0,12000), headers: dh };
-    status.className = "url-status ok"; status.textContent = `Fetched ${source.length.toLocaleString()} chars from ${url}`;
-    document.getElementById("source-preview").textContent = source.slice(0,280)+"...";
+
+    fetchedURLData = {
+      url: d.finalUrl || url,
+      source,
+      headers: dh,
+      rawHeaders,
+      status: d.status,
+      truncated: d.truncated,
+      bodyLength: d.bodyLength
+    };
+
+    const kb = Math.round((d.bodyLength || source.length) / 1024);
+    const truncNote = d.truncated ? ` (truncated — full page is ${kb}KB, scanner read first 60KB)` : "";
+    status.className = "url-status ok";
+    status.textContent = `Fetched ${(d.bodyLength||source.length).toLocaleString()} chars from ${d.finalUrl || url}${truncNote}`;
+
+    // Source preview
+    document.getElementById("source-preview").textContent = source.slice(0, 320) + "...";
+
+    // Header chips — now shows actual header values on hover
     const hc = document.getElementById("header-chips"); hc.innerHTML = "";
-    SECURITY_HEADERS.forEach(h => { const chip=document.createElement("span"); chip.className="header-chip "+(dh[h]?"present":"missing"); chip.textContent=(dh[h]?"+ ":"- ")+h; hc.appendChild(chip); });
+    SECURITY_HEADERS.forEach(h => {
+      const chip = document.createElement("span");
+      chip.className = "header-chip " + (dh[h] ? "present" : "missing");
+      chip.textContent = (dh[h] ? "+ " : "- ") + h;
+      if (rawHeaders[h]) chip.title = rawHeaders[h]; // show actual value on hover
+      hc.appendChild(chip);
+    });
+
     document.getElementById("fetched-preview-box").style.display = "block";
-  } catch(e) { status.className = "url-status err"; status.textContent = "Could not fetch URL. The site may block external requests."; }
+
+    // Auto-trigger file splitter if page is large
+    if (source.length > 20000) {
+      window.__extractChunks = {};
+      renderExtractPanel(new URL(d.finalUrl || url).hostname + ".html", source);
+    }
+
+  } catch(err) {
+    status.className = "url-status err";
+    status.textContent = `Network error: ${err.message}`;
+  }
+
   btn.disabled = false;
 }
 
