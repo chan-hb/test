@@ -133,6 +133,21 @@ textarea:focus{border-color:#ED3B86;}
 #results-section{display:none;}
 .footer-bar{background:#1A1A1A;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;margin-top:40px;}
 .footer-bar span{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9C9894;}
+.extract-panel{background:#fff;border:0.5px solid #D1CEC9;border-radius:12px;padding:18px 20px;margin-top:14px;display:none;}
+.extract-panel-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#454041;margin-bottom:12px;}
+.extract-chunks{display:flex;flex-direction:column;gap:8px;}
+.extract-chunk{background:#F9F8F6;border:0.5px solid #D1CEC9;border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:12px;}
+.extract-chunk-info{flex:1;}
+.extract-chunk-name{font-size:12px;font-weight:700;color:#1A1A1A;margin-bottom:2px;}
+.extract-chunk-meta{font-size:10px;color:#9C9894;}
+.extract-chunk-badge{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+.extract-chunk-badge.js{background:#FFF0F6;color:#9D174D;border:0.5px solid #FBCFE8;}
+.extract-chunk-badge.html{background:#EEF2FF;color:#3730A3;border:0.5px solid #C7D2FE;}
+.extract-chunk-badge.css{background:#F0FDF4;color:#166534;border:0.5px solid #BBF7D0;}
+.extract-add-btn{background:#ED3B86;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
+.extract-add-btn:hover{background:#D42E77;}
+.extract-add-btn.added{background:#4CAF50;cursor:default;}
+.extract-hint{font-size:11px;color:#9C9894;margin-top:10px;line-height:1.5;}
 .debug-panel{background:#1A1A1A;border-radius:10px;padding:14px 16px;margin-bottom:16px;display:none;}
 .debug-panel-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#ED3B86;margin-bottom:8px;}
 .debug-panel pre{font-size:10px;font-family:"Courier New",monospace;color:#F0EDEA;white-space:pre-wrap;word-break:break-all;line-height:1.6;max-height:120px;overflow-y:auto;}
@@ -174,6 +189,15 @@ textarea:focus{border-color:#ED3B86;}
       <div class="prescan-alert" id="prescan-alert">
         <div class="prescan-alert-title">Critical secrets detected before audit</div>
         <div id="prescan-items"></div>
+      </div>
+      <div class="size-alert" id="size-alert" style="display:none;background:#FFF8E1;border:1.5px solid #FFC107;border-radius:10px;padding:12px 16px;margin-top:14px;">
+        <div style="font-size:12px;font-weight:700;color:#F57F17;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px;">Large file detected</div>
+        <div id="size-alert-text" style="font-size:11px;color:#454041;line-height:1.6;"></div>
+      </div>
+      <div class="extract-panel" id="extract-panel">
+        <div class="extract-panel-title">File splitter — add chunks to audit queue</div>
+        <div class="extract-chunks" id="extract-chunks"></div>
+        <div class="extract-hint" id="extract-hint"></div>
       </div>
     </div>
 
@@ -295,16 +319,27 @@ function handleDrop(e) { e.preventDefault(); document.getElementById("drop-zone"
 function handleFileInput(e) { addFiles(Array.from(e.target.files)); }
 
 async function addFiles(files) {
+  let lastLargeHTML = null;
   for (const f of files) {
     if (!droppedFiles.find(x => x.name === f.name)) {
       droppedFiles.push(f);
       droppedContents[f.name] = await readFileText(f);
+      // Track last large HTML file added for extractor
+      const ext = f.name.split(".").pop().toLowerCase();
+      if ((ext === "html" || ext === "htm") && droppedContents[f.name].length > 20000) {
+        lastLargeHTML = f.name;
+      }
     }
   }
   renderChips();
   const allHits = [];
   droppedFiles.forEach(f => preScanContent(droppedContents[f.name]||'', f.name).forEach(h => allHits.push(h)));
   renderPrescan(allHits);
+  // Auto-trigger extractor for large HTML files
+  if (lastLargeHTML) {
+    window.__extractChunks = {};
+    renderExtractPanel(lastLargeHTML, droppedContents[lastLargeHTML]);
+  }
 }
 
 function removeFile(name) {
@@ -318,16 +353,33 @@ function removeFile(name) {
 
 function renderChips() {
   const c = document.getElementById("file-chips"); c.innerHTML = "";
+  const LIMIT = 60000;
+  let anyLarge = false; const largeFiles = [];
   droppedFiles.forEach(f => {
     const ext = f.name.split(".").pop().toLowerCase();
     const content = droppedContents[f.name] || '';
     const kb = Math.round(content.length / 1024);
     const hasSecrets = preScanContent(content, f.name).length > 0;
+    const isLarge = content.length > LIMIT;
+    if (isLarge) { anyLarge = true; largeFiles.push({ name: f.name, kb, pct: Math.round((LIMIT/content.length)*100) }); }
     const chip = document.createElement("div");
     chip.className = "file-chip" + (hasSecrets ? " has-warning" : "");
-    chip.innerHTML = `<span class="file-type-badge">${ext}</span><span>${f.name}</span><span style="font-size:10px;color:#9C9894;margin-left:2px;">${kb}KB</span>${hasSecrets?'<span class="file-size-warn">&#9888; secrets</span>':''}<button onclick="removeFile('${f.name}')" title="Remove">&#10005;</button>`;
+    chip.innerHTML = `<span class="file-type-badge">${ext}</span><span>${f.name}</span><span style="font-size:10px;color:#9C9894;margin-left:2px;">${kb}KB</span>${isLarge?`<span class="file-size-warn">&#9888; ${Math.round(LIMIT/1024)}KB limit</span>`:''} ${hasSecrets?'<span class="file-size-warn">&#9888; secrets</span>':''}<button onclick="removeFile('${f.name}')" title="Remove">&#10005;</button>`;
     c.appendChild(chip);
   });
+  const sa = document.getElementById("size-alert");
+  const sat = document.getElementById("size-alert-text");
+  if (sa && sat) {
+    if (anyLarge) {
+      sa.style.display = "block";
+      sat.innerHTML = largeFiles.map(lf =>
+        `<strong>${lf.name}</strong> is ${lf.kb}KB. Only the first 60KB (${lf.pct}% of the file) will be scanned. ` +
+        `For a complete audit of large files, split into logical sections (e.g. separate the JS logic from the HTML/CSS) and audit each part separately.`
+      ).join("<br>");
+    } else {
+      sa.style.display = "none";
+    }
+  }
 }
 
 // ── URL fetch ─────────────────────────────────────────────────────────────────
@@ -373,6 +425,109 @@ async function readFileText(f) {
   return new Promise(res => { const r = new FileReader(); r.onload = e => res(e.target.result); r.readAsText(f); });
 }
 
+// ── File splitter ────────────────────────────────────────────────────────────
+function extractChunksFromHTML(content, filename) {
+  const chunks = [];
+  const base = filename.replace(/\.html?$/i, "");
+
+  // Extract all <script> blocks
+  const scriptRe = /<script(?![^>]*src=)[^>]*>([\s\S]*?)<\/script>/gi;
+  let match; let jsBlocks = []; let scriptIdx = 0;
+  while ((match = scriptRe.exec(content)) !== null) {
+    const code = match[1].trim();
+    if (code.length > 100) jsBlocks.push(code); // skip tiny inline scripts
+  }
+  if (jsBlocks.length) {
+    const combined = jsBlocks.join("
+
+// --- next script block ---
+
+");
+    chunks.push({ name: `${base}_scripts.js`, content: combined, type: "js",
+      meta: `${jsBlocks.length} script block${jsBlocks.length>1?"s":""} — ${Math.round(combined.length/1024)}KB` });
+  }
+
+  // Extract <style> blocks as CSS chunk
+  const styleRe = /<style[^>]*>([\s\S]*?)<\/style>/gi;
+  let cssBlocks = [];
+  while ((match = styleRe.exec(content)) !== null) {
+    const code = match[1].trim();
+    if (code.length > 50) cssBlocks.push(code);
+  }
+  if (cssBlocks.length) {
+    const combined = cssBlocks.join("
+
+");
+    chunks.push({ name: `${base}_styles.css`, content: combined, type: "css",
+      meta: `${cssBlocks.length} style block${cssBlocks.length>1?"s":""} — ${Math.round(combined.length/1024)}KB` });
+  }
+
+  // HTML structure — strip scripts and styles, keep markup
+  let htmlOnly = content
+    .replace(/<script(?![^>]*src=)[^>]*>[\s\S]*?<\/script>/gi, "<!-- [script removed] -->")
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "<!-- [style removed] -->")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+  chunks.push({ name: `${base}_markup.html`, content: htmlOnly, type: "html",
+    meta: `HTML structure only — ${Math.round(htmlOnly.length/1024)}KB` });
+
+  return chunks;
+}
+
+function renderExtractPanel(filename, content) {
+  const panel = document.getElementById("extract-panel");
+  const chunksEl = document.getElementById("extract-chunks");
+  const hintEl = document.getElementById("extract-hint");
+  const chunks = extractChunksFromHTML(content, filename);
+  if (!chunks.length) { panel.style.display = "none"; return; }
+
+  panel.style.display = "block";
+  chunksEl.innerHTML = "";
+
+  chunks.forEach((chunk, idx) => {
+    const row = document.createElement("div");
+    row.className = "extract-chunk";
+    const isAdded = !!droppedFiles.find(f => f.name === chunk.name);
+    row.innerHTML = `
+      <div class="extract-chunk-info">
+        <div class="extract-chunk-name">${chunk.name}</div>
+        <div class="extract-chunk-meta">${chunk.meta}</div>
+      </div>
+      <span class="extract-chunk-badge ${chunk.type}">${chunk.type.toUpperCase()}</span>
+      <button class="extract-add-btn ${isAdded?'added':''}" id="extract-btn-${idx}"
+        onclick="addExtractedChunk(${idx})" ${isAdded?'disabled':''}>
+        ${isAdded ? 'Added' : 'Add to audit'}
+      </button>`;
+    chunksEl.appendChild(row);
+
+    // Store chunk for later retrieval
+    row.dataset.chunkIdx = idx;
+    window.__extractChunks = window.__extractChunks || {};
+    window.__extractChunks[idx] = chunk;
+  });
+
+  hintEl.innerHTML = `<strong>Tip:</strong> For a full audit of large files, add the <strong>_scripts.js</strong> chunk — this contains all application logic, authentication, and API calls. Audit it separately for complete coverage.`;
+}
+
+function addExtractedChunk(idx) {
+  const chunk = window.__extractChunks && window.__extractChunks[idx];
+  if (!chunk) return;
+  if (droppedFiles.find(f => f.name === chunk.name)) return;
+  // Create a synthetic File-like object
+  const blob = new Blob([chunk.content], { type: "text/plain" });
+  const syntheticFile = new File([blob], chunk.name, { type: "text/plain" });
+  droppedFiles.push(syntheticFile);
+  droppedContents[chunk.name] = chunk.content;
+  renderChips();
+  // Re-run prescan on new chunk
+  const allHits = [];
+  droppedFiles.forEach(f => preScanContent(droppedContents[f.name]||'', f.name).forEach(h => allHits.push(h)));
+  renderPrescan(allHits);
+  // Mark button as added
+  const btn = document.getElementById(`extract-btn-${idx}`);
+  if (btn) { btn.textContent = "Added"; btn.classList.add("added"); btn.disabled = true; }
+}
+
 async function runAudit() {
   const project = document.getElementById("project-name").value.trim() || "Unnamed Project";
   const owner = document.getElementById("owner-name").value.trim() || "Unassigned";
@@ -382,7 +537,7 @@ async function runAudit() {
     if (!droppedFiles.length) { alert("Please drop at least one file."); return; }
     droppedFiles.forEach(f => {
       const content = droppedContents[f.name] || '';
-      auditSources.push({ type:"file", label:f.name, content:content.slice(0,12000), truncated:content.length>12000 });
+      auditSources.push({ type:"file", label:f.name, content:content.slice(0,60000), truncated:content.length>60000 });
     });
   } else if (activeTab === "url") {
     if (!fetchedURLData) { alert("Please fetch a URL first."); return; }
@@ -404,7 +559,7 @@ async function runAudit() {
   msgInterval = setInterval(() => { i=(i+1)%LOADING_MSGS.length; msgEl.textContent=LOADING_MSGS[i]; }, 1400);
 
   const sourcesBlock = auditSources.map((s,idx) =>
-    `--- SOURCE ${idx+1}: ${s.label} (${s.type})${s.truncated?' [TRUNCATED to 12000 chars]':''} ---\n${s.content}`
+    `--- SOURCE ${idx+1}: ${s.label} (${s.type})${s.truncated?' [TRUNCATED to 8000 chars]':''} ---\n${s.content}`
   ).join("\n\n");
 
   const systemPrompt = `You are a security auditor for Huda Beauty internal tools. Analyse ALL provided sources and return ONLY valid JSON — no markdown, no backticks, no preamble.
@@ -441,7 +596,7 @@ Quote the actual offending code exactly as it appears. Give 3-5 findings per cat
     },
     body: JSON.stringify({
       model: "claude-sonnet-4-6",
-      max_tokens: 12000,
+      max_tokens: 16000,
       system: systemPrompt,
       messages: [{ role:"user", content:`Project: ${project}\nOwner: ${owner}\n\n${sourcesBlock}` }]
     })
@@ -567,6 +722,9 @@ function resetAudit(){
   auditResult=null; droppedFiles=[]; droppedContents={}; fetchedURLData=null;
   renderChips();
   document.getElementById("prescan-alert").style.display="none";
+  const saReset = document.getElementById("size-alert"); if(saReset) saReset.style.display="none";
+  const epReset = document.getElementById("extract-panel"); if(epReset) epReset.style.display="none";
+  window.__extractChunks = {};
   const dpReset = document.getElementById("debug-panel"); if(dpReset) dpReset.style.display="none";
   document.getElementById("input-section").style.display="block";
   document.getElementById("results-section").style.display="none";
