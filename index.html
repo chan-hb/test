@@ -13,12 +13,11 @@ body{font-family:Arial,sans-serif;background:#F0EDEA;min-height:100vh;}
 .page{max-width:900px;margin:0 auto;padding:32px 24px 48px;}
 .page-title{font-family:"Arial Black",Arial,sans-serif;font-size:22px;font-weight:900;letter-spacing:.06em;color:#1A1A1A;text-transform:uppercase;margin-bottom:4px;}
 .page-sub{font-size:13px;color:#454041;margin-bottom:28px;}
-.input-tabs{display:flex;gap:0;border-radius:10px 10px 0 0;overflow:hidden;border:0.5px solid #D1CEC9;border-bottom:none;width:fit-content;}
+.input-tabs{display:flex;border-radius:10px 10px 0 0;overflow:hidden;border:0.5px solid #D1CEC9;border-bottom:none;width:fit-content;}
 .tab-btn{padding:10px 22px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#F0EDEA;color:#9C9894;border:none;cursor:pointer;}
 .tab-btn.active{background:#fff;color:#ED3B86;}
 .input-card{background:#fff;border:0.5px solid #D1CEC9;border-radius:0 10px 10px 10px;padding:20px;margin-bottom:24px;}
-.tab-panel{display:none;}
-.tab-panel.active{display:block;}
+.tab-panel{display:none;} .tab-panel.active{display:block;}
 .drop-zone{border:2px dashed #D1CEC9;border-radius:10px;padding:36px 20px;text-align:center;cursor:pointer;transition:all .2s;position:relative;background:#FAF9F7;}
 .drop-zone.dragover{border-color:#ED3B86;background:#FFF0F6;}
 .drop-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
@@ -31,46 +30,55 @@ body{font-family:Arial,sans-serif;background:#F0EDEA;min-height:100vh;}
 .file-chip button{background:none;border:none;cursor:pointer;color:#9C9894;font-size:14px;line-height:1;padding:0;}
 .file-chip button:hover{color:#F44336;}
 .file-type-badge{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:#ED3B86;color:#fff;padding:2px 6px;border-radius:10px;}
-.file-size-warn{font-size:10px;color:#FF9800;font-weight:700;margin-left:4px;}
-.url-row{display:flex;gap:10px;align-items:stretch;}
+.file-warn-badge{font-size:9px;font-weight:700;color:#FF9800;margin-left:2px;}
+.alert-box{border-radius:10px;padding:12px 16px;margin-top:14px;display:none;}
+.alert-box.red{background:#FDECEA;border:1.5px solid #F44336;}
+.alert-box.amber{background:#FFF8E1;border:1.5px solid #FFC107;}
+.alert-title{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;}
+.alert-title.red{color:#C62828;} .alert-title.amber{color:#F57F17;}
+.alert-body{font-size:11px;color:#454041;line-height:1.7;}
+.alert-body code{font-family:"Courier New",monospace;background:#1A1A1A;color:#ED3B86;padding:1px 5px;border-radius:3px;font-size:10px;word-break:break-all;}
+.extract-panel{background:#fff;border:0.5px solid #D1CEC9;border-radius:12px;padding:18px 20px;margin-top:14px;display:none;}
+.extract-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#454041;margin-bottom:12px;}
+.extract-chunks{display:flex;flex-direction:column;gap:8px;}
+.extract-row{background:#F9F8F6;border:0.5px solid #D1CEC9;border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:12px;}
+.extract-info{flex:1;}
+.extract-name{font-size:12px;font-weight:700;color:#1A1A1A;margin-bottom:2px;}
+.extract-meta{font-size:10px;color:#9C9894;}
+.type-badge{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:10px;}
+.type-badge.js{background:#FFF0F6;color:#9D174D;border:0.5px solid #FBCFE8;}
+.type-badge.html{background:#EEF2FF;color:#3730A3;border:0.5px solid #C7D2FE;}
+.type-badge.css{background:#F0FDF4;color:#166534;border:0.5px solid #BBF7D0;}
+.add-btn{background:#ED3B86;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;}
+.add-btn:hover{background:#D42E77;} .add-btn.added{background:#4CAF50;cursor:default;}
+.extract-hint{font-size:11px;color:#9C9894;margin-top:10px;line-height:1.5;}
+.url-row{display:flex;gap:10px;}
 .url-input{flex:1;border:0.5px solid #D1CEC9;border-radius:8px;padding:10px 14px;font-size:13px;color:#1A1A1A;background:#F9F8F6;outline:none;font-family:monospace;}
 .url-input:focus{border-color:#ED3B86;}
 .url-input::placeholder{color:#9C9894;font-family:Arial,sans-serif;}
 .fetch-btn{background:#1A1A1A;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
-.fetch-btn:hover{background:#333;}
-.fetch-btn:disabled{background:#C0B8B3;cursor:not-allowed;}
+.fetch-btn:hover{background:#333;} .fetch-btn:disabled{background:#C0B8B3;cursor:not-allowed;}
 .url-status{margin-top:10px;font-size:12px;padding:8px 12px;border-radius:6px;display:none;}
-.url-status.ok{background:#E6F4EA;color:#2E7D32;}
-.url-status.err{background:#FDECEA;color:#C62828;}
-.url-status.loading{background:#F0EDEA;color:#454041;}
-.fetched-preview{margin-top:12px;background:#F0EDEA;border:0.5px solid #D1CEC9;border-radius:8px;padding:10px 14px;}
-.fetched-preview-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9C9894;margin-bottom:6px;}
-.fetched-preview pre{font-size:10px;font-family:"Courier New",monospace;color:#454041;max-height:90px;overflow:hidden;white-space:pre-wrap;word-break:break-all;}
+.url-status.ok{background:#E6F4EA;color:#2E7D32;} .url-status.err{background:#FDECEA;color:#C62828;} .url-status.loading{background:#F0EDEA;color:#454041;}
+.preview-box{margin-top:12px;background:#F0EDEA;border:0.5px solid #D1CEC9;border-radius:8px;padding:10px 14px;display:none;}
+.preview-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9C9894;margin-bottom:6px;}
+.preview-box pre{font-size:10px;font-family:"Courier New",monospace;color:#454041;max-height:90px;overflow:hidden;white-space:pre-wrap;word-break:break-all;}
 .header-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
-.header-chip{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:700;}
-.header-chip.present{background:#E6F4EA;color:#2E7D32;}
-.header-chip.missing{background:#FDECEA;color:#C62828;}
+.hchip{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:700;}
+.hchip.present{background:#E6F4EA;color:#2E7D32;} .hchip.missing{background:#FDECEA;color:#C62828;}
 textarea{width:100%;min-height:130px;border:0.5px solid #D1CEC9;border-radius:8px;padding:12px;font-size:12px;font-family:"Courier New",monospace;color:#1A1A1A;background:#F9F8F6;resize:vertical;outline:none;}
 textarea:focus{border-color:#ED3B86;}
 .meta-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;}
 .meta-row input{width:100%;border:0.5px solid #D1CEC9;border-radius:8px;padding:9px 12px;font-size:13px;color:#1A1A1A;background:#F9F8F6;outline:none;}
-.meta-row input:focus{border-color:#ED3B86;}
-.meta-row input::placeholder{color:#9C9894;}
+.meta-row input:focus{border-color:#ED3B86;} .meta-row input::placeholder{color:#9C9894;}
 .run-btn{display:block;width:100%;margin-top:14px;background:#ED3B86;color:#fff;border:none;border-radius:8px;padding:13px;font-family:"Arial Black",Arial,sans-serif;font-size:13px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;}
-.run-btn:hover{background:#D42E77;}
-.run-btn:disabled{background:#C0B8B3;cursor:not-allowed;}
-.prescan-alert{background:#FDECEA;border:1.5px solid #F44336;border-radius:10px;padding:14px 16px;margin-top:14px;display:none;}
-.prescan-alert-title{font-size:12px;font-weight:700;color:#C62828;margin-bottom:6px;letter-spacing:.04em;text-transform:uppercase;}
-.prescan-item{font-size:11px;color:#454041;line-height:1.7;display:flex;gap:8px;align-items:flex-start;margin-bottom:3px;}
-.prescan-item code{font-family:"Courier New",monospace;background:#1A1A1A;color:#ED3B86;padding:1px 5px;border-radius:3px;font-size:10px;word-break:break-all;}
+.run-btn:hover{background:#D42E77;} .run-btn:disabled{background:#C0B8B3;cursor:not-allowed;}
 .verdict-banner{border-radius:12px;padding:18px 22px;display:flex;align-items:center;gap:16px;margin-bottom:24px;}
 .verdict-banner.pass{background:#E6F4EA;border:1.5px solid #4CAF50;}
 .verdict-banner.conditional{background:#FFF8E1;border:1.5px solid #FFC107;}
 .verdict-banner.fail{background:#FDECEA;border:1.5px solid #F44336;}
 .verdict-pill{font-family:"Arial Black",Arial,sans-serif;font-size:16px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;padding:6px 18px;border-radius:20px;white-space:nowrap;}
-.verdict-pill.pass{background:#4CAF50;color:#fff;}
-.verdict-pill.conditional{background:#FFC107;color:#1A1A1A;}
-.verdict-pill.fail{background:#F44336;color:#fff;}
+.verdict-pill.pass{background:#4CAF50;color:#fff;} .verdict-pill.conditional{background:#FFC107;color:#1A1A1A;} .verdict-pill.fail{background:#F44336;color:#fff;}
 .verdict-text{font-size:13px;color:#454041;line-height:1.5;}
 .score-row{background:#fff;border:0.5px solid #D1CEC9;border-radius:12px;padding:16px 20px;margin-bottom:24px;}
 .score-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#454041;margin-bottom:8px;}
@@ -79,48 +87,36 @@ textarea:focus{border-color:#ED3B86;}
 .score-number{font-family:"Arial Black",Arial,sans-serif;font-size:22px;font-weight:900;color:#1A1A1A;}
 .score-denom{font-size:13px;color:#9C9894;margin-left:2px;}
 .source-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
-.source-tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;background:#F0EDEA;border:0.5px solid #D1CEC9;color:#454041;}
-.source-tag.url{background:#EEF2FF;border-color:#C7D2FE;color:#3730A3;}
-.source-tag.file{background:#FFF0F6;border-color:#FBCFE8;color:#9D174D;}
-.source-tag.paste{background:#F0FDF4;border-color:#BBF7D0;color:#166534;}
+.stag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;background:#F0EDEA;border:0.5px solid #D1CEC9;color:#454041;}
+.stag.url{background:#EEF2FF;border-color:#C7D2FE;color:#3730A3;}
+.stag.file{background:#FFF0F6;border-color:#FBCFE8;color:#9D174D;}
+.stag.paste{background:#F0FDF4;border-color:#BBF7D0;color:#166534;}
 .categories{display:flex;flex-direction:column;gap:12px;}
 .cat-card{background:#fff;border:0.5px solid #D1CEC9;border-radius:12px;overflow:hidden;}
 .cat-header{display:flex;align-items:center;gap:12px;padding:14px 18px;cursor:pointer;user-select:none;}
 .cat-header:hover{background:#FAF9F7;}
 .sev-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
-.sev-dot.critical{background:#F44336;}
-.sev-dot.high{background:#FF9800;}
-.sev-dot.medium{background:#FFC107;}
+.sev-dot.critical{background:#F44336;} .sev-dot.high{background:#FF9800;} .sev-dot.medium{background:#FFC107;}
 .cat-name{flex:1;font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#1A1A1A;}
-.cat-status-pill{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;}
-.cat-status-pill.pass{background:#E6F4EA;color:#2E7D32;}
-.cat-status-pill.fail{background:#FDECEA;color:#C62828;}
-.cat-status-pill.warn{background:#FFF8E1;color:#F57F17;}
-.chevron{font-size:12px;color:#9C9894;transition:transform .2s;}
-.chevron.open{transform:rotate(180deg);}
-.cat-body{border-top:0.5px solid #EAE6E1;padding:14px 18px;display:none;}
-.cat-body.open{display:block;}
+.status-pill{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;}
+.status-pill.pass{background:#E6F4EA;color:#2E7D32;} .status-pill.fail{background:#FDECEA;color:#C62828;} .status-pill.warn{background:#FFF8E1;color:#F57F17;}
+.chevron{font-size:12px;color:#9C9894;transition:transform .2s;} .chevron.open{transform:rotate(180deg);}
+.cat-body{border-top:0.5px solid #EAE6E1;padding:14px 18px;display:none;} .cat-body.open{display:block;}
 .cat-summary{font-size:12px;color:#9C9894;font-style:italic;margin-bottom:14px;padding-bottom:10px;border-bottom:0.5px solid #F0EDEA;}
-.source-section{margin-bottom:16px;}
-.source-section-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#9C9894;margin-bottom:8px;padding-bottom:4px;border-bottom:0.5px solid #F0EDEA;}
+.src-section{margin-bottom:16px;}
+.src-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#9C9894;margin-bottom:8px;padding-bottom:4px;border-bottom:0.5px solid #F0EDEA;}
 .finding-card{background:#FAFAF9;border:0.5px solid #EAE6E1;border-radius:8px;margin-bottom:8px;overflow:hidden;}
-.finding-card.finding-err{border-left:3px solid #F44336;}
-.finding-card.finding-warn{border-left:3px solid #FF9800;}
-.finding-card.finding-ok{border-left:3px solid #4CAF50;}
-.finding-card.finding-info{border-left:3px solid #9C9894;}
-.finding-header{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;}
-.finding-icon-badge{flex-shrink:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:1px;}
-.finding-icon-badge.ok{background:#E6F4EA;color:#2E7D32;}
-.finding-icon-badge.err{background:#FDECEA;color:#C62828;}
-.finding-icon-badge.warn{background:#FFF8E1;color:#F57F17;}
-.finding-icon-badge.info{background:#F0EDEA;color:#9C9894;}
-.finding-body{flex:1;}
-.finding-text{font-size:12px;color:#1A1A1A;font-weight:600;line-height:1.5;margin-bottom:3px;}
-.finding-reason{font-size:11px;color:#454041;line-height:1.5;margin-bottom:6px;}
-.finding-evidence{background:#1A1A1A;border-radius:5px;padding:7px 10px;margin-top:4px;}
-.finding-evidence-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#ED3B86;margin-bottom:3px;}
-.finding-evidence code{font-size:10px;font-family:"Courier New",monospace;color:#F0EDEA;display:block;word-break:break-all;line-height:1.6;}
-.finding-location{font-size:10px;color:#9C9894;margin-top:5px;font-style:italic;}
+.finding-card.err{border-left:3px solid #F44336;} .finding-card.warn{border-left:3px solid #FF9800;} .finding-card.ok{border-left:3px solid #4CAF50;} .finding-card.info{border-left:3px solid #9C9894;}
+.f-inner{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;}
+.f-badge{flex-shrink:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:1px;}
+.f-badge.ok{background:#E6F4EA;color:#2E7D32;} .f-badge.err{background:#FDECEA;color:#C62828;} .f-badge.warn{background:#FFF8E1;color:#F57F17;} .f-badge.info{background:#F0EDEA;color:#9C9894;}
+.f-body{flex:1;}
+.f-title{font-size:12px;color:#1A1A1A;font-weight:600;line-height:1.5;margin-bottom:3px;}
+.f-reason{font-size:11px;color:#454041;line-height:1.5;margin-bottom:6px;}
+.f-evidence{background:#1A1A1A;border-radius:5px;padding:7px 10px;margin-top:4px;}
+.f-evidence-label{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#ED3B86;margin-bottom:3px;}
+.f-evidence code{font-size:10px;font-family:"Courier New",monospace;color:#F0EDEA;display:block;word-break:break-all;line-height:1.6;}
+.f-location{font-size:10px;color:#9C9894;margin-top:5px;font-style:italic;}
 .action-row{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;}
 .export-btn{background:#1A1A1A;color:#fff;border:none;border-radius:8px;padding:12px 22px;font-family:"Arial Black",Arial,sans-serif;font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;}
 .export-btn:hover{background:#333;}
@@ -130,27 +126,12 @@ textarea:focus{border-color:#ED3B86;}
 .spinner{width:32px;height:32px;border:3px solid #EAE6E1;border-top-color:#ED3B86;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .loading-state p{font-size:13px;color:#454041;}
-#results-section{display:none;}
-.footer-bar{background:#1A1A1A;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;margin-top:40px;}
-.footer-bar span{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9C9894;}
-.extract-panel{background:#fff;border:0.5px solid #D1CEC9;border-radius:12px;padding:18px 20px;margin-top:14px;display:none;}
-.extract-panel-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#454041;margin-bottom:12px;}
-.extract-chunks{display:flex;flex-direction:column;gap:8px;}
-.extract-chunk{background:#F9F8F6;border:0.5px solid #D1CEC9;border-radius:8px;padding:10px 14px;display:flex;align-items:center;gap:12px;}
-.extract-chunk-info{flex:1;}
-.extract-chunk-name{font-size:12px;font-weight:700;color:#1A1A1A;margin-bottom:2px;}
-.extract-chunk-meta{font-size:10px;color:#9C9894;}
-.extract-chunk-badge{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:10px;white-space:nowrap;}
-.extract-chunk-badge.js{background:#FFF0F6;color:#9D174D;border:0.5px solid #FBCFE8;}
-.extract-chunk-badge.html{background:#EEF2FF;color:#3730A3;border:0.5px solid #C7D2FE;}
-.extract-chunk-badge.css{background:#F0FDF4;color:#166534;border:0.5px solid #BBF7D0;}
-.extract-add-btn{background:#ED3B86;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
-.extract-add-btn:hover{background:#D42E77;}
-.extract-add-btn.added{background:#4CAF50;cursor:default;}
-.extract-hint{font-size:11px;color:#9C9894;margin-top:10px;line-height:1.5;}
 .debug-panel{background:#1A1A1A;border-radius:10px;padding:14px 16px;margin-bottom:16px;display:none;}
 .debug-panel-title{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#ED3B86;margin-bottom:8px;}
 .debug-panel pre{font-size:10px;font-family:"Courier New",monospace;color:#F0EDEA;white-space:pre-wrap;word-break:break-all;line-height:1.6;max-height:120px;overflow-y:auto;}
+#results-section{display:none;}
+.footer-bar{background:#1A1A1A;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;margin-top:40px;}
+.footer-bar span{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#9C9894;}
 </style>
 </head>
 <body>
@@ -173,60 +154,61 @@ textarea:focus{border-color:#ED3B86;}
 
   <div class="input-card" id="input-section">
 
+    <!-- FILES TAB -->
     <div class="tab-panel active" id="tab-files">
       <div class="drop-zone" id="drop-zone"
-        ondragover="handleDragOver(event)"
-        ondragleave="handleDragLeave(event)"
-        ondrop="handleDrop(event)">
+           ondragover="handleDragOver(event)"
+           ondragleave="handleDragLeave(event)"
+           ondrop="handleDrop(event)">
         <input type="file" multiple
-          accept=".html,.htm,.js,.json,.ts,.jsx,.tsx,.env,.config,.toml,.yaml,.yml"
-          onchange="handleFileInput(event)">
+               accept=".html,.htm,.js,.json,.ts,.jsx,.tsx,.env,.config,.toml,.yaml,.yml"
+               onchange="handleFileInput(event)">
         <div class="drop-icon">&#128196;</div>
         <div class="drop-title">Drop files here or click to browse</div>
         <div class="drop-sub">Accepts .html .js .json .ts .jsx .tsx .env .yaml .toml</div>
       </div>
       <div class="file-chips" id="file-chips"></div>
-      <div class="prescan-alert" id="prescan-alert">
-        <div class="prescan-alert-title">Critical secrets detected before audit</div>
-        <div id="prescan-items"></div>
+      <div class="alert-box red" id="prescan-alert">
+        <div class="alert-title red">Critical secrets detected before audit</div>
+        <div class="alert-body" id="prescan-body"></div>
       </div>
-      <div class="size-alert" id="size-alert" style="display:none;background:#FFF8E1;border:1.5px solid #FFC107;border-radius:10px;padding:12px 16px;margin-top:14px;">
-        <div style="font-size:12px;font-weight:700;color:#F57F17;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px;">Large file detected</div>
-        <div id="size-alert-text" style="font-size:11px;color:#454041;line-height:1.6;"></div>
+      <div class="alert-box amber" id="size-alert">
+        <div class="alert-title amber">Large file detected</div>
+        <div class="alert-body" id="size-body"></div>
       </div>
       <div class="extract-panel" id="extract-panel">
-        <div class="extract-panel-title">File splitter — add chunks to audit queue</div>
+        <div class="extract-title">File splitter — add chunks to audit queue</div>
         <div class="extract-chunks" id="extract-chunks"></div>
         <div class="extract-hint" id="extract-hint"></div>
       </div>
     </div>
 
+    <!-- URL TAB -->
     <div class="tab-panel" id="tab-url">
       <div class="url-row">
-        <input class="url-input" type="url" id="url-input" placeholder="https://your-project.vercel.app"/>
+        <input class="url-input" type="url" id="url-input" placeholder="https://your-project.vercel.app">
         <button class="fetch-btn" id="fetch-btn" onclick="fetchURL()">Fetch</button>
       </div>
       <div class="url-status" id="url-status"></div>
-      <div id="fetched-preview-box" style="display:none;">
-        <div class="fetched-preview">
-          <div class="fetched-preview-title">Source preview</div>
-          <pre id="source-preview"></pre>
-        </div>
-        <div class="fetched-preview" style="margin-top:8px;">
-          <div class="fetched-preview-title">Security headers detected</div>
-          <div class="header-chips" id="header-chips"></div>
-        </div>
+      <div class="preview-box" id="preview-box">
+        <div class="preview-title">Source preview</div>
+        <pre id="source-preview"></pre>
+      </div>
+      <div class="preview-box" id="headers-box" style="margin-top:8px;">
+        <div class="preview-title">Security headers detected</div>
+        <div class="header-chips" id="header-chips"></div>
       </div>
     </div>
 
+    <!-- PASTE TAB -->
     <div class="tab-panel" id="tab-paste">
       <label style="display:block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#454041;margin-bottom:8px;">Code / Config</label>
       <textarea id="code-input" placeholder="Paste HTML, JS, JSON config, or describe your deployment..."></textarea>
     </div>
 
     <div class="meta-row">
-      <input id="project-name" type="text" placeholder="Project name (e.g. Influencer Assessment)"/>
-      <input id="owner-name" type="text" placeholder="Owner name (e.g. Chan Sharma)"/>
+      <input id="project-name" type="text" placeholder="Project name (e.g. Influencer Assessment)">
+      <input id="owner-name" type="text" placeholder="Owner name (e.g. Chan Sharma)">
     </div>
     <button class="run-btn" id="run-btn" onclick="runAudit()">Run Security Audit</button>
   </div>
@@ -236,10 +218,11 @@ textarea:focus{border-color:#ED3B86;}
     <p id="loading-msg">Analysing...</p>
   </div>
 
-  <div id="debug-panel" class="debug-panel">
+  <div class="debug-panel" id="debug-panel">
     <div class="debug-panel-title">Debug — API Response</div>
     <pre id="debug-content"></pre>
   </div>
+
   <div id="results-section">
     <div class="verdict-banner" id="verdict-banner">
       <span class="verdict-pill" id="verdict-pill"></span>
@@ -251,7 +234,7 @@ textarea:focus{border-color:#ED3B86;}
         <span class="score-number" id="score-num">0</span>
         <span class="score-denom">/ 100</span>
       </div>
-      <div class="score-bar-bg"><div class="score-bar-fill" id="score-bar" style="width:0%;"></div></div>
+      <div class="score-bar-bg"><div class="score-bar-fill" id="score-bar" style="width:0%"></div></div>
     </div>
     <div class="source-tags" id="source-tags"></div>
     <div class="categories" id="categories-list"></div>
@@ -268,51 +251,70 @@ textarea:focus{border-color:#ED3B86;}
 </div>
 
 <script>
-// ── Pre-scan patterns ─────────────────────────────────────────────────────────
+const LIMIT = 60000;
 const SECRET_PATTERNS = [
-  { label:"Anthropic API Key",   re:/sk-ant-[a-zA-Z0-9\-_]{20,}/g },
-  { label:"OpenAI API Key",      re:/sk-[a-zA-Z0-9]{32,}/g },
-  { label:"Generic API Key var", re:/(?:api_key|apikey|API_KEY)\s*[=:]\s*['"][^'"]{8,}['"]/gi },
-  { label:"Auth token var",      re:/(?:auth_token|AUTH_TOKEN|authToken)\s*[=:]\s*['"][^'"]{8,}['"]/gi },
-  { label:"Bearer token",        re:/Bearer\s+[a-zA-Z0-9\-_\.]{20,}/g },
-  { label:"Password in code",    re:/(?:password|passwd|PASSWORD)\s*[=:]\s*['"][^'"]{4,}['"]/gi },
-  { label:"Connection string",   re:/(?:mongodb|postgres|mysql|mssql):\/\/[^\s'"]+/gi },
+  { label:"Anthropic API Key", re:/sk-ant-[a-zA-Z0-9\-_]{20,}/g },
+  { label:"OpenAI API Key",    re:/sk-[a-zA-Z0-9]{32,}/g },
+  { label:"API Key variable",  re:/(?:api_key|apikey|API_KEY)\s*[=:]\s*['"][^'"]{8,}['"]/gi },
+  { label:"Auth token",        re:/(?:auth_token|AUTH_TOKEN|authToken)\s*[=:]\s*['"][^'"]{8,}['"]/gi },
+  { label:"Bearer token",      re:/Bearer\s+[a-zA-Z0-9\-_\.]{20,}/g },
+  { label:"Password",          re:/(?:password|passwd|PASSWORD)\s*[=:]\s*['"][^'"]{4,}['"]/gi },
+  { label:"Connection string", re:/(?:mongodb|postgres|mysql|mssql):\/\/[^\s'"]+/gi }
+];
+const SEC_HEADERS = [
+  "content-security-policy","strict-transport-security","x-frame-options",
+  "x-content-type-options","referrer-policy","permissions-policy",
+  "x-xss-protection","cross-origin-embedder-policy","cross-origin-opener-policy"
+];
+const LOADING_MSGS = [
+  "Scanning for exposed secrets...","Checking auth configuration...",
+  "Reviewing PII and GDPR exposure...","Auditing dependencies...",
+  "Checking security headers...","Validating brand and governance...","Compiling verdict..."
 ];
 
-function preScanContent(content, filename) {
+let activeTab = "files";
+let droppedFiles = [], droppedContents = {};
+let fetchedURLData = null;
+let auditResult = null, auditMeta = {}, auditSources = [];
+let msgInterval;
+let extractChunks = {};
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+function switchTab(t) {
+  activeTab = t;
+  document.querySelectorAll(".tab-btn").forEach((b, i) => {
+    b.classList.toggle("active", ["files","url","paste"][i] === t);
+  });
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+  document.getElementById("tab-" + t).classList.add("active");
+}
+
+// ── Pre-scan ──────────────────────────────────────────────────────────────────
+function preScan(content, filename) {
   const hits = [];
   SECRET_PATTERNS.forEach(p => {
     const matches = content.match(p.re);
     if (matches) matches.forEach(m => {
-      const display = m.length > 40 ? m.slice(0,20)+'...'+m.slice(-8) : m;
+      const display = m.length > 40 ? m.slice(0,20) + "..." + m.slice(-8) : m;
       hits.push({ label: p.label, match: display, file: filename });
     });
   });
   return hits;
 }
 
-function renderPrescan(allHits) {
-  const box = document.getElementById('prescan-alert');
-  const items = document.getElementById('prescan-items');
-  if (!allHits.length) { box.style.display='none'; return; }
-  box.style.display = 'block';
-  items.innerHTML = allHits.map(h =>
-    `<div class="prescan-item"><span style="color:#F44336;font-weight:700;flex-shrink:0;">&#10005;</span><span><strong>${h.label}</strong> in <strong>${h.file}</strong>: <code>${escHtml(h.match)}</code> — revoke this credential immediately before deploying.</span></div>`
-  ).join('');
-}
-
-// ── Tabs ──────────────────────────────────────────────────────────────────────
-let activeTab = "files";
-function switchTab(t) {
-  activeTab = t;
-  document.querySelectorAll(".tab-btn").forEach((b,i) => b.classList.toggle("active", ["files","url","paste"][i]===t));
-  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
-  document.getElementById("tab-"+t).classList.add("active");
+function runPrescan() {
+  const hits = [];
+  droppedFiles.forEach(f => preScan(droppedContents[f.name] || "", f.name).forEach(h => hits.push(h)));
+  const box = document.getElementById("prescan-alert");
+  const body = document.getElementById("prescan-body");
+  if (!hits.length) { box.style.display = "none"; return; }
+  box.style.display = "block";
+  body.innerHTML = hits.map(h =>
+    '<div><strong>&#10005; ' + h.label + '</strong> in <strong>' + h.file + '</strong>: <code>' + escHtml(h.match) + '</code> — revoke immediately.</div>'
+  ).join("");
 }
 
 // ── File drop ─────────────────────────────────────────────────────────────────
-let droppedFiles = [], droppedContents = {};
-
 function handleDragOver(e) { e.preventDefault(); document.getElementById("drop-zone").classList.add("dragover"); }
 function handleDragLeave() { document.getElementById("drop-zone").classList.remove("dragover"); }
 function handleDrop(e) { e.preventDefault(); document.getElementById("drop-zone").classList.remove("dragover"); addFiles(Array.from(e.dataTransfer.files)); }
@@ -324,7 +326,6 @@ async function addFiles(files) {
     if (!droppedFiles.find(x => x.name === f.name)) {
       droppedFiles.push(f);
       droppedContents[f.name] = await readFileText(f);
-      // Track last large HTML file added for extractor
       const ext = f.name.split(".").pop().toLowerCase();
       if ((ext === "html" || ext === "htm") && droppedContents[f.name].length > 20000) {
         lastLargeHTML = f.name;
@@ -332,184 +333,66 @@ async function addFiles(files) {
     }
   }
   renderChips();
-  const allHits = [];
-  droppedFiles.forEach(f => preScanContent(droppedContents[f.name]||'', f.name).forEach(h => allHits.push(h)));
-  renderPrescan(allHits);
-  // Auto-trigger extractor for large HTML files
-  if (lastLargeHTML) {
-    window.__extractChunks = {};
-    renderExtractPanel(lastLargeHTML, droppedContents[lastLargeHTML]);
-  }
+  runPrescan();
+  if (lastLargeHTML) renderExtractPanel(lastLargeHTML, droppedContents[lastLargeHTML]);
 }
 
 function removeFile(name) {
   droppedFiles = droppedFiles.filter(f => f.name !== name);
   delete droppedContents[name];
   renderChips();
-  const allHits = [];
-  droppedFiles.forEach(f => preScanContent(droppedContents[f.name]||'', f.name).forEach(h => allHits.push(h)));
-  renderPrescan(allHits);
+  runPrescan();
 }
 
 function renderChips() {
-  const c = document.getElementById("file-chips"); c.innerHTML = "";
-  const LIMIT = 60000;
-  let anyLarge = false; const largeFiles = [];
+  const c = document.getElementById("file-chips");
+  c.innerHTML = "";
+  const largeFiles = [];
   droppedFiles.forEach(f => {
     const ext = f.name.split(".").pop().toLowerCase();
-    const content = droppedContents[f.name] || '';
+    const content = droppedContents[f.name] || "";
     const kb = Math.round(content.length / 1024);
-    const hasSecrets = preScanContent(content, f.name).length > 0;
+    const hasSecrets = preScan(content, f.name).length > 0;
     const isLarge = content.length > LIMIT;
-    if (isLarge) { anyLarge = true; largeFiles.push({ name: f.name, kb, pct: Math.round((LIMIT/content.length)*100) }); }
+    if (isLarge) largeFiles.push({ name: f.name, kb, pct: Math.round((LIMIT / content.length) * 100) });
     const chip = document.createElement("div");
     chip.className = "file-chip" + (hasSecrets ? " has-warning" : "");
-    chip.innerHTML = `<span class="file-type-badge">${ext}</span><span>${f.name}</span><span style="font-size:10px;color:#9C9894;margin-left:2px;">${kb}KB</span>${isLarge?`<span class="file-size-warn">&#9888; ${Math.round(LIMIT/1024)}KB limit</span>`:''} ${hasSecrets?'<span class="file-size-warn">&#9888; secrets</span>':''}<button onclick="removeFile('${f.name}')" title="Remove">&#10005;</button>`;
+    chip.innerHTML =
+      '<span class="file-type-badge">' + ext + '</span>' +
+      '<span>' + f.name + '</span>' +
+      '<span style="font-size:10px;color:#9C9894;margin-left:2px;">' + kb + 'KB</span>' +
+      (isLarge ? '<span class="file-warn-badge">&#9888; large</span>' : '') +
+      (hasSecrets ? '<span class="file-warn-badge">&#9888; secrets</span>' : '') +
+      '<button onclick="removeFile(\'' + f.name + '\')" title="Remove">&#10005;</button>';
     c.appendChild(chip);
   });
-  const sa = document.getElementById("size-alert");
-  const sat = document.getElementById("size-alert-text");
-  if (sa && sat) {
-    if (anyLarge) {
-      sa.style.display = "block";
-      sat.innerHTML = largeFiles.map(lf =>
-        `<strong>${lf.name}</strong> is ${lf.kb}KB. Only the first 60KB (${lf.pct}% of the file) will be scanned. ` +
-        `For a complete audit of large files, split into logical sections (e.g. separate the JS logic from the HTML/CSS) and audit each part separately.`
-      ).join("<br>");
-    } else {
-      sa.style.display = "none";
-    }
+  const sizeBox = document.getElementById("size-alert");
+  const sizeBody = document.getElementById("size-body");
+  if (largeFiles.length) {
+    sizeBox.style.display = "block";
+    sizeBody.innerHTML = largeFiles.map(lf =>
+      '<strong>' + lf.name + '</strong> is ' + lf.kb + 'KB. Only the first 60KB (' + lf.pct + '% of file) will be scanned. Use the file splitter below to audit the JS logic separately.'
+    ).join("<br>");
+  } else {
+    sizeBox.style.display = "none";
   }
 }
 
-// ── URL fetch ─────────────────────────────────────────────────────────────────
-let fetchedURLData = null;
-const SECURITY_HEADERS = [
-  "content-security-policy",
-  "strict-transport-security",
-  "x-frame-options",
-  "x-content-type-options",
-  "referrer-policy",
-  "permissions-policy",
-  "x-xss-protection",
-  "cross-origin-embedder-policy",
-  "cross-origin-opener-policy"
-];
-
-async function fetchURL() {
-  const url = document.getElementById("url-input").value.trim();
-  if (!url) { alert("Please enter a URL."); return; }
-
-  const btn = document.getElementById("fetch-btn");
-  const status = document.getElementById("url-status");
-  btn.disabled = true;
-  status.style.display = "block";
-  status.className = "url-status loading";
-  status.textContent = "Fetching page source and headers via server...";
-  document.getElementById("fetched-preview-box").style.display = "none";
-  fetchedURLData = null;
-
-  try {
-    const r = await fetch("/api/fetch-url", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ url })
-    });
-
-    const d = await r.json();
-
-    if (!r.ok || d.error) {
-      status.className = "url-status err";
-      status.textContent = d.error || `Server error ${r.status}`;
-      btn.disabled = false;
-      return;
-    }
-
-    const source = d.body || "";
-    const rawHeaders = d.securityHeaders || {};
-
-    // Build detected headers map — now using real response headers, not body scraping
-    const dh = {};
-    SECURITY_HEADERS.forEach(h => {
-      dh[h] = rawHeaders[h] !== null && rawHeaders[h] !== undefined && rawHeaders[h] !== false;
-    });
-
-    fetchedURLData = {
-      url: d.finalUrl || url,
-      source,
-      headers: dh,
-      rawHeaders,
-      status: d.status,
-      truncated: d.truncated,
-      bodyLength: d.bodyLength
-    };
-
-    const kb = Math.round((d.bodyLength || source.length) / 1024);
-    const truncNote = d.truncated ? ` (truncated — full page is ${kb}KB, scanner read first 60KB)` : "";
-    status.className = "url-status ok";
-    status.textContent = `Fetched ${(d.bodyLength||source.length).toLocaleString()} chars from ${d.finalUrl || url}${truncNote}`;
-
-    // Source preview
-    document.getElementById("source-preview").textContent = source.slice(0, 320) + "...";
-
-    // Header chips — now shows actual header values on hover
-    const hc = document.getElementById("header-chips"); hc.innerHTML = "";
-    SECURITY_HEADERS.forEach(h => {
-      const chip = document.createElement("span");
-      chip.className = "header-chip " + (dh[h] ? "present" : "missing");
-      chip.textContent = (dh[h] ? "+ " : "- ") + h;
-      if (rawHeaders[h]) chip.title = rawHeaders[h]; // show actual value on hover
-      hc.appendChild(chip);
-    });
-
-    document.getElementById("fetched-preview-box").style.display = "block";
-
-    // Auto-trigger file splitter if page is large
-    if (source.length > 20000) {
-      window.__extractChunks = {};
-      renderExtractPanel(new URL(d.finalUrl || url).hostname + ".html", source);
-    }
-
-  } catch(err) {
-    status.className = "url-status err";
-    status.textContent = `Network error: ${err.message}`;
-  }
-
-  btn.disabled = false;
-}
-
-// ── Audit ─────────────────────────────────────────────────────────────────────
-let auditResult = null, auditMeta = {}, auditSources = [];
-const LOADING_MSGS = ["Scanning for exposed secrets...","Checking auth configuration...","Reviewing PII and GDPR exposure...","Auditing dependencies...","Checking security headers...","Validating brand and governance...","Compiling verdict..."];
-let msgInterval;
-
-async function readFileText(f) {
-  return new Promise(res => { const r = new FileReader(); r.onload = e => res(e.target.result); r.readAsText(f); });
-}
-
-// ── File splitter ────────────────────────────────────────────────────────────
+// ── File splitter ─────────────────────────────────────────────────────────────
 function extractChunksFromHTML(content, filename) {
   const chunks = [];
   const base = filename.replace(/\.html?$/i, "");
-
-  // Extract all <script> blocks
   const scriptRe = /<script(?![^>]*src=)[^>]*>([\s\S]*?)<\/script>/gi;
-  let match; let jsBlocks = []; let scriptIdx = 0;
+  let match, jsBlocks = [];
   while ((match = scriptRe.exec(content)) !== null) {
     const code = match[1].trim();
-    if (code.length > 100) jsBlocks.push(code); // skip tiny inline scripts
+    if (code.length > 100) jsBlocks.push(code);
   }
   if (jsBlocks.length) {
-    const combined = jsBlocks.join("
-
-// --- next script block ---
-
-");
-    chunks.push({ name: `${base}_scripts.js`, content: combined, type: "js",
-      meta: `${jsBlocks.length} script block${jsBlocks.length>1?"s":""} — ${Math.round(combined.length/1024)}KB` });
+    const combined = jsBlocks.join("\n\n// --- next script block ---\n\n");
+    chunks.push({ name: base + "_scripts.js", content: combined, type: "js",
+      meta: jsBlocks.length + " script block(s) — " + Math.round(combined.length / 1024) + "KB" });
   }
-
-  // Extract <style> blocks as CSS chunk
   const styleRe = /<style[^>]*>([\s\S]*?)<\/style>/gi;
   let cssBlocks = [];
   while ((match = styleRe.exec(content)) !== null) {
@@ -517,22 +400,16 @@ function extractChunksFromHTML(content, filename) {
     if (code.length > 50) cssBlocks.push(code);
   }
   if (cssBlocks.length) {
-    const combined = cssBlocks.join("
-
-");
-    chunks.push({ name: `${base}_styles.css`, content: combined, type: "css",
-      meta: `${cssBlocks.length} style block${cssBlocks.length>1?"s":""} — ${Math.round(combined.length/1024)}KB` });
+    const combined = cssBlocks.join("\n\n");
+    chunks.push({ name: base + "_styles.css", content: combined, type: "css",
+      meta: cssBlocks.length + " style block(s) — " + Math.round(combined.length / 1024) + "KB" });
   }
-
-  // HTML structure — strip scripts and styles, keep markup
   let htmlOnly = content
     .replace(/<script(?![^>]*src=)[^>]*>[\s\S]*?<\/script>/gi, "<!-- [script removed] -->")
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "<!-- [style removed] -->")
-    .replace(/\s{2,}/g, " ")
-    .trim();
-  chunks.push({ name: `${base}_markup.html`, content: htmlOnly, type: "html",
-    meta: `HTML structure only — ${Math.round(htmlOnly.length/1024)}KB` });
-
+    .replace(/\s{2,}/g, " ").trim();
+  chunks.push({ name: base + "_markup.html", content: htmlOnly, type: "html",
+    meta: "HTML structure only — " + Math.round(htmlOnly.length / 1024) + "KB" });
   return chunks;
 }
 
@@ -542,52 +419,102 @@ function renderExtractPanel(filename, content) {
   const hintEl = document.getElementById("extract-hint");
   const chunks = extractChunksFromHTML(content, filename);
   if (!chunks.length) { panel.style.display = "none"; return; }
-
+  extractChunks = {};
   panel.style.display = "block";
   chunksEl.innerHTML = "";
-
-  chunks.forEach((chunk, idx) => {
-    const row = document.createElement("div");
-    row.className = "extract-chunk";
+  chunks.forEach(function(chunk, idx) {
+    extractChunks[idx] = chunk;
     const isAdded = !!droppedFiles.find(f => f.name === chunk.name);
-    row.innerHTML = `
-      <div class="extract-chunk-info">
-        <div class="extract-chunk-name">${chunk.name}</div>
-        <div class="extract-chunk-meta">${chunk.meta}</div>
-      </div>
-      <span class="extract-chunk-badge ${chunk.type}">${chunk.type.toUpperCase()}</span>
-      <button class="extract-add-btn ${isAdded?'added':''}" id="extract-btn-${idx}"
-        onclick="addExtractedChunk(${idx})" ${isAdded?'disabled':''}>
-        ${isAdded ? 'Added' : 'Add to audit'}
-      </button>`;
+    const row = document.createElement("div");
+    row.className = "extract-row";
+    row.innerHTML =
+      '<div class="extract-info">' +
+        '<div class="extract-name">' + chunk.name + '</div>' +
+        '<div class="extract-meta">' + chunk.meta + '</div>' +
+      '</div>' +
+      '<span class="type-badge ' + chunk.type + '">' + chunk.type.toUpperCase() + '</span>' +
+      '<button class="add-btn' + (isAdded ? ' added' : '') + '" id="ebtn-' + idx + '" ' +
+        (isAdded ? 'disabled' : 'onclick="addChunk(' + idx + ')"') + '>' +
+        (isAdded ? 'Added' : 'Add to audit') +
+      '</button>';
     chunksEl.appendChild(row);
-
-    // Store chunk for later retrieval
-    row.dataset.chunkIdx = idx;
-    window.__extractChunks = window.__extractChunks || {};
-    window.__extractChunks[idx] = chunk;
   });
-
-  hintEl.innerHTML = `<strong>Tip:</strong> For a full audit of large files, add the <strong>_scripts.js</strong> chunk — this contains all application logic, authentication, and API calls. Audit it separately for complete coverage.`;
+  hintEl.innerHTML = '<strong>Tip:</strong> Add the <strong>_scripts.js</strong> chunk for a full audit of application logic, authentication, and API calls.';
 }
 
-function addExtractedChunk(idx) {
-  const chunk = window.__extractChunks && window.__extractChunks[idx];
-  if (!chunk) return;
-  if (droppedFiles.find(f => f.name === chunk.name)) return;
-  // Create a synthetic File-like object
+function addChunk(idx) {
+  const chunk = extractChunks[idx];
+  if (!chunk || droppedFiles.find(f => f.name === chunk.name)) return;
   const blob = new Blob([chunk.content], { type: "text/plain" });
-  const syntheticFile = new File([blob], chunk.name, { type: "text/plain" });
-  droppedFiles.push(syntheticFile);
+  const synthetic = new File([blob], chunk.name, { type: "text/plain" });
+  droppedFiles.push(synthetic);
   droppedContents[chunk.name] = chunk.content;
   renderChips();
-  // Re-run prescan on new chunk
-  const allHits = [];
-  droppedFiles.forEach(f => preScanContent(droppedContents[f.name]||'', f.name).forEach(h => allHits.push(h)));
-  renderPrescan(allHits);
-  // Mark button as added
-  const btn = document.getElementById(`extract-btn-${idx}`);
+  runPrescan();
+  const btn = document.getElementById("ebtn-" + idx);
   if (btn) { btn.textContent = "Added"; btn.classList.add("added"); btn.disabled = true; }
+}
+
+// ── URL fetch ─────────────────────────────────────────────────────────────────
+async function fetchURL() {
+  const url = document.getElementById("url-input").value.trim();
+  if (!url) { alert("Please enter a URL."); return; }
+  const btn = document.getElementById("fetch-btn");
+  const status = document.getElementById("url-status");
+  btn.disabled = true;
+  status.style.display = "block";
+  status.className = "url-status loading";
+  status.textContent = "Fetching page source and headers via server...";
+  document.getElementById("preview-box").style.display = "none";
+  document.getElementById("headers-box").style.display = "none";
+  fetchedURLData = null;
+  try {
+    const r = await fetch("/api/fetch-url", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url: url })
+    });
+    const d = await r.json();
+    if (!r.ok || d.error) {
+      status.className = "url-status err";
+      status.textContent = d.error || ("Server error " + r.status);
+      btn.disabled = false;
+      return;
+    }
+    const source = d.body || "";
+    const rawHeaders = d.securityHeaders || {};
+    const dh = {};
+    SEC_HEADERS.forEach(function(h) { dh[h] = rawHeaders[h] !== null && rawHeaders[h] !== undefined && rawHeaders[h] !== false; });
+    fetchedURLData = { url: d.finalUrl || url, source: source, headers: dh, rawHeaders: rawHeaders, truncated: d.truncated, bodyLength: d.bodyLength };
+    const kb = Math.round((d.bodyLength || source.length) / 1024);
+    status.className = "url-status ok";
+    status.textContent = "Fetched " + (d.bodyLength || source.length).toLocaleString() + " chars from " + (d.finalUrl || url) + (d.truncated ? " (truncated — full page is " + kb + "KB, scanner read first 60KB)" : "");
+    document.getElementById("source-preview").textContent = source.slice(0, 320) + "...";
+    document.getElementById("preview-box").style.display = "block";
+    const hc = document.getElementById("header-chips");
+    hc.innerHTML = "";
+    SEC_HEADERS.forEach(function(h) {
+      const chip = document.createElement("span");
+      chip.className = "hchip " + (dh[h] ? "present" : "missing");
+      chip.textContent = (dh[h] ? "+ " : "- ") + h;
+      if (rawHeaders[h]) chip.title = rawHeaders[h];
+      hc.appendChild(chip);
+    });
+    document.getElementById("headers-box").style.display = "block";
+    if (source.length > 20000) {
+      extractChunks = {};
+      renderExtractPanel((new URL(d.finalUrl || url)).hostname + ".html", source);
+    }
+  } catch(err) {
+    status.className = "url-status err";
+    status.textContent = "Network error: " + err.message;
+  }
+  btn.disabled = false;
+}
+
+// ── Audit ─────────────────────────────────────────────────────────────────────
+async function readFileText(f) {
+  return new Promise(function(res) { const r = new FileReader(); r.onload = function(e) { res(e.target.result); }; r.readAsText(f); });
 }
 
 async function runAudit() {
@@ -597,275 +524,322 @@ async function runAudit() {
 
   if (activeTab === "files") {
     if (!droppedFiles.length) { alert("Please drop at least one file."); return; }
-    droppedFiles.forEach(f => {
-      const content = droppedContents[f.name] || '';
-      auditSources.push({ type:"file", label:f.name, content:content.slice(0,60000), truncated:content.length>60000 });
+    droppedFiles.forEach(function(f) {
+      const content = droppedContents[f.name] || "";
+      auditSources.push({ type: "file", label: f.name, content: content.slice(0, LIMIT), truncated: content.length > LIMIT });
     });
   } else if (activeTab === "url") {
     if (!fetchedURLData) { alert("Please fetch a URL first."); return; }
-    auditSources.push({ type:"url", label:fetchedURLData.url, content:fetchedURLData.source, headers:fetchedURLData.headers });
+    auditSources.push({ type: "url", label: fetchedURLData.url, content: fetchedURLData.source, headers: fetchedURLData.headers });
   } else {
     const code = document.getElementById("code-input").value.trim();
     if (!code) { alert("Please paste code first."); return; }
-    auditSources.push({ type:"paste", label:"Pasted code", content:code });
+    auditSources.push({ type: "paste", label: "Pasted code", content: code });
   }
 
-  auditMeta = { project, owner, date: new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"long",year:"numeric"}), sourceCount: auditSources.length };
+  auditMeta = { project: project, owner: owner, date: new Date().toLocaleDateString("en-GB", { day:"2-digit", month:"long", year:"numeric" }) };
   document.getElementById("input-section").style.display = "none";
   document.getElementById("loading-state").style.display = "block";
   document.getElementById("results-section").style.display = "none";
+  document.getElementById("debug-panel").style.display = "none";
   document.getElementById("run-btn").disabled = true;
 
-  let i = 0;
-  const msgEl = document.getElementById("loading-msg"); msgEl.textContent = LOADING_MSGS[0];
-  msgInterval = setInterval(() => { i=(i+1)%LOADING_MSGS.length; msgEl.textContent=LOADING_MSGS[i]; }, 1400);
+  var i = 0;
+  var msgEl = document.getElementById("loading-msg");
+  msgEl.textContent = LOADING_MSGS[0];
+  msgInterval = setInterval(function() { i = (i + 1) % LOADING_MSGS.length; msgEl.textContent = LOADING_MSGS[i]; }, 1400);
 
-  const sourcesBlock = auditSources.map((s,idx) =>
-    `--- SOURCE ${idx+1}: ${s.label} (${s.type})${s.truncated?' [TRUNCATED to 8000 chars]':''} ---\n${s.content}`
-  ).join("\n\n");
+  var sourcesBlock = auditSources.map(function(s, idx) {
+    return "--- SOURCE " + (idx + 1) + ": " + s.label + " (" + s.type + ")" + (s.truncated ? " [TRUNCATED to 60KB]" : "") + " ---\n" + s.content;
+  }).join("\n\n");
 
-  const systemPrompt = `You are a security auditor for Huda Beauty internal tools. Analyse ALL provided sources and return ONLY valid JSON — no markdown, no backticks, no preamble.
-
-CRITICAL: For every "err" or "warn" finding you MUST provide:
-1. "reason": WHY this is a security problem (1-2 sentences on the specific risk)
-2. "evidence": The EXACT code snippet/variable/string from the source. Quote it directly. Use "" for ok/info.
-3. "location": WHERE in the file — e.g. "line 146", "inside script tag", "vercel.json headers block". Use "" if not applicable.
-
-Return this exact JSON:
-{
-  "verdict": "PASS"|"CONDITIONAL"|"FAIL",
-  "verdictReason": "one sentence",
-  "score": 0-100,
-  "categories": [
-    { "id":"secrets",      "name":"Secrets",              "severity":"critical", "status":"pass"|"fail"|"warn", "summary":"", "perSource":[{ "source":"filename", "status":"pass"|"fail"|"warn", "findings":[{ "level":"ok"|"err"|"warn"|"info", "text":"title", "reason":"why", "evidence":"exact code", "location":"where" }] }] },
-    { "id":"auth",         "name":"Auth & SSO",            "severity":"critical", "status":"pass"|"fail"|"warn", "summary":"", "perSource":[] },
-    { "id":"pii",          "name":"Data & PII (GDPR)",     "severity":"critical", "status":"pass"|"fail"|"warn", "summary":"", "perSource":[] },
-    { "id":"dependencies", "name":"Dependencies",          "severity":"high",     "status":"pass"|"fail"|"warn", "summary":"", "perSource":[] },
-    { "id":"headers",      "name":"Headers & Config",      "severity":"high",     "status":"pass"|"fail"|"warn", "summary":"", "perSource":[] },
-    { "id":"brand",        "name":"Brand & Governance",    "severity":"medium",   "status":"pass"|"fail"|"warn", "summary":"", "perSource":[] },
-    { "id":"general",      "name":"General Best Practices","severity":"medium",   "status":"pass"|"fail"|"warn", "summary":"", "perSource":[] }
-  ]
-}
-
-Verdict: critical fail=FAIL, high fail=CONDITIONAL, all critical+high pass=PASS.
-Score: start 100, deduct critical fail -25, high fail -15, warn -5, medium fail -8.
-Quote the actual offending code exactly as it appears. Give 3-5 findings per category per source.`;
+  var systemPrompt = "You are a security auditor for Huda Beauty internal tools. Analyse ALL provided sources and return ONLY valid JSON — no markdown, no backticks, no preamble.\n\n" +
+    "CRITICAL: For every 'err' or 'warn' finding you MUST provide:\n" +
+    "1. reason: WHY this is a security problem (1-2 sentences)\n" +
+    "2. evidence: The EXACT code snippet from the source. Quote it directly. Use empty string for ok/info.\n" +
+    "3. location: WHERE in the file e.g. line 146, inside script tag, vercel.json headers block. Use empty string if not applicable.\n\n" +
+    "Return this exact JSON:\n" +
+    '{"verdict":"PASS"|"CONDITIONAL"|"FAIL","verdictReason":"one sentence","score":0-100,"categories":[' +
+    '{"id":"secrets","name":"Secrets","severity":"critical","status":"pass"|"fail"|"warn","summary":"","perSource":[{"source":"filename","status":"pass"|"fail"|"warn","findings":[{"level":"ok"|"err"|"warn"|"info","text":"title","reason":"why","evidence":"exact code","location":"where"}]}]},' +
+    '{"id":"auth","name":"Auth & SSO","severity":"critical","status":"pass"|"fail"|"warn","summary":"","perSource":[]},' +
+    '{"id":"pii","name":"Data & PII (GDPR)","severity":"critical","status":"pass"|"fail"|"warn","summary":"","perSource":[]},' +
+    '{"id":"dependencies","name":"Dependencies","severity":"high","status":"pass"|"fail"|"warn","summary":"","perSource":[]},' +
+    '{"id":"headers","name":"Headers & Config","severity":"high","status":"pass"|"fail"|"warn","summary":"","perSource":[]},' +
+    '{"id":"brand","name":"Brand & Governance","severity":"medium","status":"pass"|"fail"|"warn","summary":"","perSource":[]},' +
+    '{"id":"general","name":"General Best Practices","severity":"medium","status":"pass"|"fail"|"warn","summary":"","perSource":[]}' +
+    "]}\n\n" +
+    "Verdict: critical fail=FAIL, high fail=CONDITIONAL, all critical+high pass=PASS.\n" +
+    "Score: start 100, deduct critical fail -25, high fail -15, warn -5, medium fail -8.\n" +
+    "Give 3-5 findings per category per source. Quote actual offending code exactly.";
 
   fetch("/api/audit", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       model: "claude-sonnet-4-6",
       max_tokens: 16000,
       system: systemPrompt,
-      messages: [{ role:"user", content:`Project: ${project}\nOwner: ${owner}\n\n${sourcesBlock}` }]
+      messages: [{ role: "user", content: "Project: " + project + "\nOwner: " + owner + "\n\n" + sourcesBlock }]
     })
   })
-  .then(r => {
-    if (!r.ok) return r.text().then(t => { throw new Error(`API ${r.status}: ${t.slice(0,300)}`); });
+  .then(function(r) {
+    if (!r.ok) return r.text().then(function(t) { throw new Error("API " + r.status + ": " + t.slice(0, 300)); });
     return r.json();
   })
-  .then(data => {
+  .then(function(data) {
     clearInterval(msgInterval);
-    // Surface any API-level error (e.g. auth failure, rate limit)
-    if (data.error) { auditResult = fallbackResult(`API error: ${data.error.type} — ${data.error.message}`); renderResults(auditResult); return; }
-    const raw = (data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("");
-    if (!raw) { auditResult = fallbackResult(`Empty response from API. stop_reason: ${data.stop_reason||"unknown"}`); renderResults(auditResult); return; }
+    if (data.error) { showFallback("API error: " + data.error.type + " — " + data.error.message); return; }
+    var raw = (data.content || []).filter(function(b) { return b.type === "text"; }).map(function(b) { return b.text; }).join("");
+    if (!raw) { showFallback("Empty response. stop_reason: " + (data.stop_reason || "unknown")); return; }
     try {
-      // Strip markdown fences robustly
-      let clean = raw
-        .replace(/^```json\s*/i, "")
-        .replace(/^```\s*/i, "")
-        .replace(/```\s*$/i, "")
-        .trim();
-      // Extract outermost JSON object
-      const s = clean.indexOf("{");
-      const e = clean.lastIndexOf("}");
-      if (s < 0 || e < 0) throw new Error("No JSON object found in response");
-      clean = clean.slice(s, e + 1);
-      // Attempt to fix truncated JSON by closing open structures
-      auditResult = safeParseJSON(clean);
-    } catch(e) {
-      auditResult = fallbackResult(`JSON parse failed: ${e.message}. First 200 chars of response: ${raw.slice(0,200)}`);
+      var clean = raw.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/```\s*$/i, "").trim();
+      var s = clean.indexOf("{"), e = clean.lastIndexOf("}");
+      if (s < 0 || e < 0) throw new Error("No JSON object in response");
+      auditResult = safeParseJSON(clean.slice(s, e + 1));
+      document.getElementById("debug-panel").style.display = "none";
+      renderResults(auditResult);
+    } catch(err) {
+      showFallback("JSON parse failed: " + err.message + ". Response start: " + raw.slice(0, 200));
     }
-    const dpanel = document.getElementById("debug-panel");
-    if (dpanel) dpanel.style.display = "none";
-    renderResults(auditResult);
   })
-  .catch(err => { clearInterval(msgInterval); auditResult = fallbackResult(`Network error: ${err.message}`); renderResults(auditResult); });
+  .catch(function(err) { clearInterval(msgInterval); showFallback("Network error: " + err.message); });
 }
 
-// Attempts to parse JSON, and if truncated, closes open arrays/objects
+function showFallback(reason) {
+  clearInterval(msgInterval);
+  console.error("[HB Audit]", reason);
+  var dp = document.getElementById("debug-panel");
+  var dc = document.getElementById("debug-content");
+  if (dp && dc) { dp.style.display = "block"; dc.textContent = reason; }
+  var ps = auditSources.map(function(s) { return { source: s.label, status: "warn", findings: [{ level: "info", text: "Auto-analysis unavailable", reason: reason, evidence: "", location: "" }] }; });
+  auditResult = { verdict: "CONDITIONAL", verdictReason: "Auto-analysis unavailable: " + reason, score: 50,
+    categories: ["secrets","auth","pii","dependencies","headers","brand","general"].map(function(id, i) {
+      return { id: id, name: ["Secrets","Auth & SSO","Data & PII (GDPR)","Dependencies","Headers & Config","Brand & Governance","General Best Practices"][i],
+        severity: ["critical","critical","critical","high","high","medium","medium"][i], status: "warn", summary: "Could not auto-analyse.", perSource: ps };
+    })
+  };
+  renderResults(auditResult);
+}
+
 function safeParseJSON(str) {
-  // First try clean parse
   try { return JSON.parse(str); } catch(e) {}
-  // Repair: close any unclosed strings, arrays, objects
-  let repaired = str;
-  // Remove trailing partial property (last incomplete key:value pair)
+  var repaired = str;
   repaired = repaired.replace(/,\s*"[^"]*"\s*:\s*[^,}\]]*$/, "");
   repaired = repaired.replace(/,\s*"[^"]*"\s*$/, "");
-  // Count and close open brackets
-  let opens = 0, openBrackets = 0;
-  for (const ch of repaired) {
+  var opens = 0, openBrackets = 0;
+  for (var ci = 0; ci < repaired.length; ci++) {
+    var ch = repaired[ci];
     if (ch === "{") opens++;
     else if (ch === "}") opens--;
     else if (ch === "[") openBrackets++;
     else if (ch === "]") openBrackets--;
   }
-  // Close open arrays first, then objects
-  for (let i = 0; i < openBrackets; i++) repaired += "]";
-  for (let i = 0; i < opens; i++) repaired += "}";
+  for (var bi = 0; bi < openBrackets; bi++) repaired += "]";
+  for (var oi = 0; oi < opens; oi++) repaired += "}";
   return JSON.parse(repaired);
-}
-
-function fallbackResult(reason) {
-  const displayReason = reason || "Could not connect to audit engine.";
-  console.error("[HB Audit] Fallback triggered:", displayReason);
-  const dp = document.getElementById("debug-panel");
-  const dc = document.getElementById("debug-content");
-  if (dp && dc) { dp.style.display = "block"; dc.textContent = displayReason; }
-  const ps = auditSources.map(s => ({ source:s.label, status:"warn", findings:[{ level:"info", text:"Auto-analysis unavailable", reason:displayReason, evidence:"", location:"" }] }));
-  return { verdict:"CONDITIONAL", verdictReason:`Auto-analysis unavailable: ${displayReason}`, score:50,
-    categories: ["secrets","auth","pii","dependencies","headers","brand","general"].map((id,i) => ({
-      id, name:["Secrets","Auth & SSO","Data & PII (GDPR)","Dependencies","Headers & Config","Brand & Governance","General Best Practices"][i],
-      severity:["critical","critical","critical","high","high","medium","medium"][i],
-      status:"warn", summary:"Could not auto-analyse.", perSource:ps
-    }))
-  };
 }
 
 function renderResults(result) {
   document.getElementById("loading-state").style.display = "none";
   document.getElementById("results-section").style.display = "block";
-  const verdict = (result.verdict||"CONDITIONAL").toUpperCase();
-  const vClass = verdict==="PASS"?"pass":verdict==="FAIL"?"fail":"conditional";
-  document.getElementById("verdict-banner").className = "verdict-banner "+vClass;
-  const pill = document.getElementById("verdict-pill"); pill.className="verdict-pill "+vClass; pill.textContent=verdict;
-  document.getElementById("verdict-text").innerHTML = `<strong>${auditMeta.project}</strong> &mdash; Owner: ${auditMeta.owner}<br>${result.verdictReason||""}`;
-  const score = Math.max(0,Math.min(100,result.score||0));
+  var verdict = (result.verdict || "CONDITIONAL").toUpperCase();
+  var vClass = verdict === "PASS" ? "pass" : verdict === "FAIL" ? "fail" : "conditional";
+  document.getElementById("verdict-banner").className = "verdict-banner " + vClass;
+  var pill = document.getElementById("verdict-pill");
+  pill.className = "verdict-pill " + vClass;
+  pill.textContent = verdict;
+  document.getElementById("verdict-text").innerHTML = "<strong>" + auditMeta.project + "</strong> &mdash; Owner: " + auditMeta.owner + "<br>" + (result.verdictReason || "");
+  var score = Math.max(0, Math.min(100, result.score || 0));
   document.getElementById("score-num").textContent = score;
-  const bar = document.getElementById("score-bar"); bar.style.width=score+"%"; bar.style.background=score>=80?"#4CAF50":score>=50?"#FFC107":"#F44336";
-  const st = document.getElementById("source-tags"); st.innerHTML="";
-  auditSources.forEach(s=>{ const tag=document.createElement("span"); tag.className="source-tag "+s.type; tag.textContent=(s.type==="url"?"URL: ":s.type==="file"?"File: ":"Paste: ")+s.label; st.appendChild(tag); });
-  const list = document.getElementById("categories-list"); list.innerHTML="";
-  const SEV = { critical:"🔴 Critical", high:"🟠 High", medium:"🟡 Medium" };
-  (result.categories||[]).forEach((cat,idx) => {
-    const sc=cat.status==="pass"?"pass":cat.status==="fail"?"fail":"warn";
-    const sl=cat.status==="pass"?"Pass":cat.status==="fail"?"Fail":"Review";
-    const card=document.createElement("div"); card.className="cat-card";
-    const hdr=document.createElement("div"); hdr.className="cat-header";
-    hdr.innerHTML=`<span class="sev-dot ${cat.severity||"medium"}"></span><span class="cat-name">${cat.name} <span style="font-weight:400;font-size:10px;color:#9C9894;">${SEV[cat.severity]||""}</span></span><span class="cat-status-pill ${sc}">${sl}</span><span class="chevron" id="chev-${idx}">&#9662;</span>`;
-    const body=document.createElement("div"); body.className="cat-body"; body.id=`body-${idx}`;
-    if(cat.summary){const s=document.createElement("p");s.className="cat-summary";s.textContent=cat.summary;body.appendChild(s);}
-    (cat.perSource||[]).forEach(ps => {
-      const sec=document.createElement("div"); sec.className="source-section";
-      const lbl=document.createElement("div"); lbl.className="source-section-label"; lbl.textContent=ps.source; sec.appendChild(lbl);
-      (ps.findings||[]).forEach(f => {
-        const fc=document.createElement("div"); fc.className=`finding-card finding-${f.level}`;
-        const iconMap={ok:"&#10003;",err:"&#10005;",warn:"&#9888;",info:"i"};
-        let inner=`<div class="finding-header"><div class="finding-icon-badge ${f.level}">${iconMap[f.level]||"i"}</div><div class="finding-body"><div class="finding-text">${f.text}</div>`;
-        if(f.reason) inner+=`<div class="finding-reason">${f.reason}</div>`;
-        if(f.evidence&&f.evidence.trim()) inner+=`<div class="finding-evidence"><div class="finding-evidence-label">Evidence found in code</div><code>${escHtml(f.evidence)}</code></div>`;
-        if(f.location&&f.location.trim()) inner+=`<div class="finding-location">Location: ${escHtml(f.location)}</div>`;
-        inner+=`</div></div>`; fc.innerHTML=inner; sec.appendChild(fc);
+  var bar = document.getElementById("score-bar");
+  bar.style.width = score + "%";
+  bar.style.background = score >= 80 ? "#4CAF50" : score >= 50 ? "#FFC107" : "#F44336";
+  var st = document.getElementById("source-tags");
+  st.innerHTML = "";
+  auditSources.forEach(function(s) {
+    var tag = document.createElement("span");
+    tag.className = "stag " + s.type;
+    tag.textContent = (s.type === "url" ? "URL: " : s.type === "file" ? "File: " : "Paste: ") + s.label;
+    st.appendChild(tag);
+  });
+  var list = document.getElementById("categories-list");
+  list.innerHTML = "";
+  var SEV = { critical: "&#128308; Critical", high: "&#128992; High", medium: "&#128993; Medium" };
+  (result.categories || []).forEach(function(cat, idx) {
+    var sc = cat.status === "pass" ? "pass" : cat.status === "fail" ? "fail" : "warn";
+    var sl = cat.status === "pass" ? "Pass" : cat.status === "fail" ? "Fail" : "Review";
+    var card = document.createElement("div"); card.className = "cat-card";
+    var hdr = document.createElement("div"); hdr.className = "cat-header";
+    hdr.innerHTML = '<span class="sev-dot ' + (cat.severity || "medium") + '"></span>' +
+      '<span class="cat-name">' + cat.name + ' <span style="font-weight:400;font-size:10px;color:#9C9894;">' + (SEV[cat.severity] || "") + '</span></span>' +
+      '<span class="status-pill ' + sc + '">' + sl + '</span>' +
+      '<span class="chevron" id="chev-' + idx + '">&#9662;</span>';
+    var body = document.createElement("div"); body.className = "cat-body"; body.id = "body-" + idx;
+    if (cat.summary) { var sumEl = document.createElement("p"); sumEl.className = "cat-summary"; sumEl.textContent = cat.summary; body.appendChild(sumEl); }
+    (cat.perSource || []).forEach(function(ps) {
+      var sec = document.createElement("div"); sec.className = "src-section";
+      var lbl = document.createElement("div"); lbl.className = "src-label"; lbl.textContent = ps.source; sec.appendChild(lbl);
+      (ps.findings || []).forEach(function(f) {
+        var fc = document.createElement("div"); fc.className = "finding-card " + (f.level || "info");
+        var icons = { ok: "&#10003;", err: "&#10005;", warn: "&#9888;", info: "i" };
+        var inner = '<div class="f-inner"><div class="f-badge ' + f.level + '">' + (icons[f.level] || "i") + '</div><div class="f-body">' +
+          '<div class="f-title">' + f.text + '</div>';
+        if (f.reason) inner += '<div class="f-reason">' + f.reason + '</div>';
+        if (f.evidence && f.evidence.trim()) inner += '<div class="f-evidence"><div class="f-evidence-label">Evidence found in code</div><code>' + escHtml(f.evidence) + '</code></div>';
+        if (f.location && f.location.trim()) inner += '<div class="f-location">Location: ' + escHtml(f.location) + '</div>';
+        inner += '</div></div>';
+        fc.innerHTML = inner;
+        sec.appendChild(fc);
       });
       body.appendChild(sec);
     });
-    hdr.addEventListener("click",()=>{ const o=body.classList.toggle("open"); document.getElementById(`chev-${idx}`).classList.toggle("open",o); });
+    hdr.addEventListener("click", function() {
+      var o = body.classList.toggle("open");
+      document.getElementById("chev-" + idx).classList.toggle("open", o);
+    });
     card.appendChild(hdr); card.appendChild(body); list.appendChild(card);
   });
 }
 
-function escHtml(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function escHtml(s) {
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
 
-function resetAudit(){
-  auditResult=null; droppedFiles=[]; droppedContents={}; fetchedURLData=null;
-  renderChips();
-  document.getElementById("prescan-alert").style.display="none";
-  const saReset = document.getElementById("size-alert"); if(saReset) saReset.style.display="none";
-  const epReset = document.getElementById("extract-panel"); if(epReset) epReset.style.display="none";
-  window.__extractChunks = {};
-  const dpReset = document.getElementById("debug-panel"); if(dpReset) dpReset.style.display="none";
-  document.getElementById("input-section").style.display="block";
-  document.getElementById("results-section").style.display="none";
-  document.getElementById("run-btn").disabled=false;
-  document.getElementById("code-input").value="";
-  document.getElementById("project-name").value="";
-  document.getElementById("url-input").value="";
-  document.getElementById("url-status").style.display="none";
-  document.getElementById("fetched-preview-box").style.display="none";
+function resetAudit() {
+  auditResult = null; droppedFiles = []; droppedContents = {}; fetchedURLData = null; extractChunks = {};
+  document.getElementById("file-chips").innerHTML = "";
+  document.getElementById("prescan-alert").style.display = "none";
+  document.getElementById("size-alert").style.display = "none";
+  document.getElementById("extract-panel").style.display = "none";
+  document.getElementById("debug-panel").style.display = "none";
+  document.getElementById("input-section").style.display = "block";
+  document.getElementById("results-section").style.display = "none";
+  document.getElementById("run-btn").disabled = false;
+  document.getElementById("code-input").value = "";
+  document.getElementById("project-name").value = "";
+  document.getElementById("url-input").value = "";
+  document.getElementById("url-status").style.display = "none";
+  document.getElementById("preview-box").style.display = "none";
+  document.getElementById("headers-box").style.display = "none";
 }
 
 // ── PDF ───────────────────────────────────────────────────────────────────────
-function exportPDF(){
-  if(!auditResult)return;
-  const{jsPDF}=window.jspdf;
-  const doc=new jsPDF({orientation:"portrait",unit:"mm",format:"a4"});
-  const W=210,H=297,PK=[237,59,134],VANTA=[26,26,26],CHARCOAL=[69,64,65],CLOUD=[240,237,234],WHITE=[255,255,255],GREEN=[76,175,80],AMBER=[255,193,7],RED=[244,67,54],ORANGE=[255,152,0];
-  const verdict=(auditResult.verdict||"CONDITIONAL").toUpperCase();
-  const score=Math.max(0,Math.min(100,auditResult.score||0));
-  const vColor=verdict==="PASS"?GREEN:verdict==="FAIL"?RED:AMBER;
-  function foot(){doc.setTextColor(160,160,160);doc.setFontSize(7.5);doc.setFont("helvetica","normal");doc.setCharSpace(0);doc.text("HUDA BEAUTY — SECURITY AUDIT REPORT — CONFIDENTIAL",W/2,H-8,{align:"center"});}
+function exportPDF() {
+  if (!auditResult) return;
+  var jsPDF = window.jspdf.jsPDF;
+  var doc = new jsPDF({ orientation:"portrait", unit:"mm", format:"a4" });
+  var W=210,H=297,PK=[237,59,134],VANTA=[26,26,26],CHARCOAL=[69,64,65],CLOUD=[240,237,234],WHITE=[255,255,255],GREEN=[76,175,80],AMBER=[255,193,7],RED=[244,67,54],ORANGE=[255,152,0];
+  var verdict = (auditResult.verdict || "CONDITIONAL").toUpperCase();
+  var score = Math.max(0, Math.min(100, auditResult.score || 0));
+  var vColor = verdict === "PASS" ? GREEN : verdict === "FAIL" ? RED : AMBER;
+  function foot() { doc.setTextColor(160,160,160); doc.setFontSize(7.5); doc.setFont("helvetica","normal"); doc.setCharSpace(0); doc.text("HUDA BEAUTY — SECURITY AUDIT REPORT — CONFIDENTIAL", W/2, H-8, {align:"center"}); }
   // Cover
-  doc.setFillColor(...VANTA);doc.rect(0,0,W,H,"F");doc.setFillColor(...PK);doc.rect(0,0,8,H,"F");
-  doc.setTextColor(...WHITE);doc.setFont("helvetica","bold");doc.setFontSize(22);doc.setCharSpace(3);doc.text("HUDA BEAUTY",22,48);
-  doc.setDrawColor(...PK);doc.setLineWidth(0.5);doc.line(22,54,188,54);
-  doc.setCharSpace(0);doc.setFontSize(32);doc.text("SECURITY",22,82);doc.setTextColor(...PK);doc.text("AUDIT REPORT",22,96);
-  doc.setFillColor(...vColor);doc.roundedRect(22,110,56,14,3,3,"F");
-  doc.setTextColor(...(verdict==="CONDITIONAL"?VANTA:WHITE));doc.setFontSize(13);doc.setFont("helvetica","bold");doc.setCharSpace(2);doc.text(verdict,50,119.5,{align:"center"});
-  doc.setFillColor(...WHITE);doc.circle(155,120,22,"F");doc.setTextColor(...VANTA);doc.setFontSize(28);doc.setFont("helvetica","bold");doc.setCharSpace(0);doc.text(String(score),155,124,{align:"center"});doc.setFontSize(9);doc.setFont("helvetica","normal");doc.setTextColor(...CHARCOAL);doc.text("/ 100",155,131,{align:"center"});
-  let my=152;[["Project",auditMeta.project||"Unnamed"],["Owner",auditMeta.owner||"Unassigned"],["Date",auditMeta.date||""],["Sources",auditSources.map(s=>s.label).join(", ").slice(0,55)]].forEach(([k,v])=>{doc.setFont("helvetica","bold");doc.setTextColor(...PK);doc.setFontSize(10);doc.text(k.toUpperCase(),22,my);doc.setFont("helvetica","normal");doc.setTextColor(...CLOUD);doc.text(v,70,my);my+=9;});
-  doc.setFillColor(40,40,40);doc.roundedRect(22,196,166,28,3,3,"F");doc.setTextColor(...WHITE);doc.setFontSize(9);doc.setFont("helvetica","bold");doc.text("VERDICT SUMMARY",30,206);doc.setFont("helvetica","normal");doc.setTextColor(...CLOUD);doc.setFontSize(9);doc.text(doc.splitTextToSize(auditResult.verdictReason||"",150),30,213);
-  doc.setTextColor(100,100,100);doc.setFontSize(8);doc.text("CONFIDENTIAL — INTERNAL USE ONLY",W/2,H-14,{align:"center"});doc.text("hudabeauty.com",W/2,H-9,{align:"center"});
-  // Sources
-  doc.addPage();doc.setFillColor(...VANTA);doc.rect(0,0,W,36,"F");doc.setFillColor(...PK);doc.rect(0,0,W,4,"F");doc.setTextColor(...WHITE);doc.setFont("helvetica","bold");doc.setFontSize(16);doc.setCharSpace(1);doc.text("SOURCES AUDITED",14,23);doc.setCharSpace(0);
-  let sy=52;auditSources.forEach(s=>{const tc=s.type==="url"?[55,48,163]:s.type==="file"?[157,23,77]:[22,101,52];doc.setFillColor(...CLOUD);doc.roundedRect(14,sy-6,182,16,2,2,"F");doc.setFillColor(...tc);doc.roundedRect(14,sy-6,22,16,2,2,"F");doc.setTextColor(...WHITE);doc.setFont("helvetica","bold");doc.setFontSize(8);doc.setCharSpace(0.5);doc.text(s.type.toUpperCase(),25,sy+3,{align:"center"});doc.setTextColor(...CHARCOAL);doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setCharSpace(0);doc.text(s.label.length>70?s.label.slice(0,67)+"...":s.label,40,sy+3);sy+=22;});foot();
-  // Categories
-  const SEV_LABEL={critical:"CRITICAL",high:"HIGH",medium:"MEDIUM"},SEV_COLOR={critical:RED,high:ORANGE,medium:AMBER};
-  (auditResult.categories||[]).forEach((cat,ci)=>{
-    doc.addPage();const sc=cat.status==="pass"?GREEN:cat.status==="fail"?RED:AMBER;const sl=cat.status==="pass"?"PASS":cat.status==="fail"?"FAIL":"REVIEW";
-    doc.setFillColor(...VANTA);doc.rect(0,0,W,36,"F");doc.setFillColor(...PK);doc.rect(0,0,W,4,"F");
-    doc.setTextColor(...CLOUD);doc.setFontSize(8);doc.setFont("helvetica","normal");doc.text(`${ci+1} / ${auditResult.categories.length}`,W-14,24,{align:"right"});
-    doc.setTextColor(...WHITE);doc.setFontSize(16);doc.setFont("helvetica","bold");doc.setCharSpace(1);doc.text(cat.name.toUpperCase(),14,23);doc.setCharSpace(0);
-    doc.setFillColor(...(SEV_COLOR[cat.severity]||[150,150,150]));doc.roundedRect(14,42,30,7,2,2,"F");doc.setTextColor(...VANTA);doc.setFontSize(7);doc.setFont("helvetica","bold");doc.setCharSpace(1);doc.text(SEV_LABEL[cat.severity]||"MEDIUM",29,47,{align:"center"});
-    doc.setFillColor(...sc);doc.roundedRect(48,42,22,7,2,2,"F");doc.setTextColor(...(sc===AMBER?VANTA:WHITE));doc.text(sl,59,47,{align:"center"});doc.setCharSpace(0);
-    if(cat.summary){doc.setFillColor(...CLOUD);doc.roundedRect(14,54,182,14,2,2,"F");doc.setTextColor(...CHARCOAL);doc.setFontSize(9);doc.setFont("helvetica","italic");doc.text(doc.splitTextToSize(cat.summary,172)[0]||"",20,63);}
-    let fy=76;
-    (cat.perSource||[]).forEach(ps=>{
-      if(fy>H-40){doc.addPage();foot();fy=20;}
-      const psColor=auditSources.find(s=>s.label===ps.source)?.type==="url"?[55,48,163]:auditSources.find(s=>s.label===ps.source)?.type==="file"?[157,23,77]:[22,101,52];
-      const psStatus=ps.status==="pass"?GREEN:ps.status==="fail"?RED:AMBER;
-      doc.setFillColor(245,244,243);doc.roundedRect(14,fy-3,182,10,2,2,"F");doc.setFillColor(...(psColor||CHARCOAL));doc.roundedRect(14,fy-3,3,10,0,0,"F");
-      doc.setTextColor(...CHARCOAL);doc.setFont("helvetica","bold");doc.setFontSize(8.5);doc.setCharSpace(0);doc.text(ps.source.length>58?ps.source.slice(0,55)+"...":ps.source,20,fy+4);
-      doc.setFillColor(...psStatus);doc.roundedRect(170,fy-1,24,6,2,2,"F");doc.setTextColor(...(ps.status==="warn"?VANTA:WHITE));doc.setFontSize(6.5);doc.setCharSpace(0.5);doc.text(sl,182,fy+3.5,{align:"center"});
+  doc.setFillColor.apply(doc,VANTA); doc.rect(0,0,W,H,"F");
+  doc.setFillColor.apply(doc,PK); doc.rect(0,0,8,H,"F");
+  doc.setTextColor.apply(doc,WHITE); doc.setFont("helvetica","bold"); doc.setFontSize(22); doc.setCharSpace(3); doc.text("HUDA BEAUTY",22,48);
+  doc.setDrawColor.apply(doc,PK); doc.setLineWidth(0.5); doc.line(22,54,188,54);
+  doc.setCharSpace(0); doc.setFontSize(32); doc.text("SECURITY",22,82);
+  doc.setTextColor.apply(doc,PK); doc.text("AUDIT REPORT",22,96);
+  doc.setFillColor.apply(doc,vColor); doc.roundedRect(22,110,56,14,3,3,"F");
+  doc.setTextColor.apply(doc, verdict==="CONDITIONAL"?VANTA:WHITE); doc.setFontSize(13); doc.setFont("helvetica","bold"); doc.setCharSpace(2); doc.text(verdict,50,119.5,{align:"center"});
+  doc.setFillColor.apply(doc,WHITE); doc.circle(155,120,22,"F");
+  doc.setTextColor.apply(doc,VANTA); doc.setFontSize(28); doc.setFont("helvetica","bold"); doc.setCharSpace(0); doc.text(String(score),155,124,{align:"center"});
+  doc.setFontSize(9); doc.setFont("helvetica","normal"); doc.setTextColor.apply(doc,CHARCOAL); doc.text("/ 100",155,131,{align:"center"});
+  var my=152;
+  [["Project",auditMeta.project||"Unnamed"],["Owner",auditMeta.owner||"Unassigned"],["Date",auditMeta.date||""],["Sources",auditSources.map(function(s){return s.label;}).join(", ").slice(0,55)]].forEach(function(kv) {
+    doc.setFont("helvetica","bold"); doc.setTextColor.apply(doc,PK); doc.setFontSize(10); doc.text(kv[0].toUpperCase(),22,my);
+    doc.setFont("helvetica","normal"); doc.setTextColor.apply(doc,CLOUD); doc.text(kv[1],70,my); my+=9;
+  });
+  doc.setFillColor(40,40,40); doc.roundedRect(22,196,166,28,3,3,"F");
+  doc.setTextColor.apply(doc,WHITE); doc.setFontSize(9); doc.setFont("helvetica","bold"); doc.text("VERDICT SUMMARY",30,206);
+  doc.setFont("helvetica","normal"); doc.setTextColor.apply(doc,CLOUD); doc.setFontSize(9); doc.text(doc.splitTextToSize(auditResult.verdictReason||"",150),30,213);
+  doc.setTextColor(100,100,100); doc.setFontSize(8); doc.text("CONFIDENTIAL — INTERNAL USE ONLY",W/2,H-14,{align:"center"}); doc.text("hudabeauty.com",W/2,H-9,{align:"center"});
+  // Sources page
+  doc.addPage(); doc.setFillColor.apply(doc,VANTA); doc.rect(0,0,W,36,"F"); doc.setFillColor.apply(doc,PK); doc.rect(0,0,W,4,"F");
+  doc.setTextColor.apply(doc,WHITE); doc.setFont("helvetica","bold"); doc.setFontSize(16); doc.setCharSpace(1); doc.text("SOURCES AUDITED",14,23); doc.setCharSpace(0);
+  var sy=52;
+  auditSources.forEach(function(s) {
+    var tc = s.type==="url"?[55,48,163]:s.type==="file"?[157,23,77]:[22,101,52];
+    doc.setFillColor.apply(doc,CLOUD); doc.roundedRect(14,sy-6,182,16,2,2,"F");
+    doc.setFillColor.apply(doc,tc); doc.roundedRect(14,sy-6,22,16,2,2,"F");
+    doc.setTextColor.apply(doc,WHITE); doc.setFont("helvetica","bold"); doc.setFontSize(8); doc.setCharSpace(0.5); doc.text(s.type.toUpperCase(),25,sy+3,{align:"center"});
+    doc.setTextColor.apply(doc,CHARCOAL); doc.setFont("helvetica","normal"); doc.setFontSize(10); doc.setCharSpace(0);
+    doc.text(s.label.length>70?s.label.slice(0,67)+"...":s.label,40,sy+3); sy+=22;
+  });
+  foot();
+  // Category pages
+  var SEV_LABEL={critical:"CRITICAL",high:"HIGH",medium:"MEDIUM"};
+  var SEV_COLOR={critical:RED,high:ORANGE,medium:AMBER};
+  (auditResult.categories||[]).forEach(function(cat,ci) {
+    doc.addPage();
+    var sc = cat.status==="pass"?GREEN:cat.status==="fail"?RED:AMBER;
+    var sl = cat.status==="pass"?"PASS":cat.status==="fail"?"FAIL":"REVIEW";
+    doc.setFillColor.apply(doc,VANTA); doc.rect(0,0,W,36,"F"); doc.setFillColor.apply(doc,PK); doc.rect(0,0,W,4,"F");
+    doc.setTextColor.apply(doc,CLOUD); doc.setFontSize(8); doc.setFont("helvetica","normal"); doc.text((ci+1)+" / "+auditResult.categories.length,W-14,24,{align:"right"});
+    doc.setTextColor.apply(doc,WHITE); doc.setFontSize(16); doc.setFont("helvetica","bold"); doc.setCharSpace(1); doc.text(cat.name.toUpperCase(),14,23); doc.setCharSpace(0);
+    doc.setFillColor.apply(doc,SEV_COLOR[cat.severity]||[150,150,150]); doc.roundedRect(14,42,30,7,2,2,"F");
+    doc.setTextColor.apply(doc,VANTA); doc.setFontSize(7); doc.setFont("helvetica","bold"); doc.setCharSpace(1); doc.text(SEV_LABEL[cat.severity]||"MEDIUM",29,47,{align:"center"});
+    doc.setFillColor.apply(doc,sc); doc.roundedRect(48,42,22,7,2,2,"F");
+    doc.setTextColor.apply(doc,sc===AMBER?VANTA:WHITE); doc.text(sl,59,47,{align:"center"}); doc.setCharSpace(0);
+    if (cat.summary) { doc.setFillColor.apply(doc,CLOUD); doc.roundedRect(14,54,182,14,2,2,"F"); doc.setTextColor.apply(doc,CHARCOAL); doc.setFontSize(9); doc.setFont("helvetica","italic"); doc.text(doc.splitTextToSize(cat.summary,172)[0]||"",20,63); }
+    var fy=76;
+    (cat.perSource||[]).forEach(function(ps) {
+      if (fy>H-40) { doc.addPage(); foot(); fy=20; }
+      var psType = auditSources.find(function(s){return s.label===ps.source;});
+      var psColor = psType && psType.type==="url"?[55,48,163]:psType && psType.type==="file"?[157,23,77]:[22,101,52];
+      var psStatus = ps.status==="pass"?GREEN:ps.status==="fail"?RED:AMBER;
+      doc.setFillColor(245,244,243); doc.roundedRect(14,fy-3,182,10,2,2,"F");
+      doc.setFillColor.apply(doc,psColor||CHARCOAL); doc.roundedRect(14,fy-3,3,10,0,0,"F");
+      doc.setTextColor.apply(doc,CHARCOAL); doc.setFont("helvetica","bold"); doc.setFontSize(8.5); doc.setCharSpace(0);
+      doc.text(ps.source.length>58?ps.source.slice(0,55)+"...":ps.source,20,fy+4);
+      doc.setFillColor.apply(doc,psStatus); doc.roundedRect(170,fy-1,24,6,2,2,"F");
+      doc.setTextColor.apply(doc,ps.status==="warn"?VANTA:WHITE); doc.setFontSize(6.5); doc.setCharSpace(0.5); doc.text(sl,182,fy+3.5,{align:"center"});
       fy+=16;
-      (ps.findings||[]).forEach(f=>{
-        const fColor=f.level==="ok"?GREEN:f.level==="err"?RED:f.level==="warn"?ORANGE:[180,180,180];
-        const hasEvidence=!!(f.evidence&&f.evidence.trim()),hasReason=!!(f.reason&&f.reason.trim());
-        const evidenceLines=hasEvidence?doc.splitTextToSize(f.evidence.trim().slice(0,220),158):[];
-        const reasonLines=hasReason?doc.splitTextToSize(f.reason.trim(),158):[];
-        const blockH=10+(hasReason?reasonLines.length*4.5+4:0)+(hasEvidence?evidenceLines.length*4.5+14:0)+(f.location?6:0);
-        if(fy+blockH>H-16){doc.addPage();foot();fy=20;}
-        const bgColor=f.level==="err"?[253,236,234]:f.level==="warn"?[255,248,225]:f.level==="ok"?[230,244,234]:[248,248,248];
-        doc.setFillColor(...bgColor);doc.roundedRect(14,fy-2,182,blockH,2,2,"F");doc.setFillColor(...fColor);doc.roundedRect(14,fy-2,3,blockH,0,0,"F");
-        doc.setTextColor(...VANTA);doc.setFont("helvetica","bold");doc.setFontSize(8.5);doc.setCharSpace(0);const tl=doc.splitTextToSize(f.text||"",164);doc.text(tl,20,fy+4);
-        let fiy=fy+4+tl.length*5;
-        if(hasReason){doc.setFont("helvetica","normal");doc.setFontSize(8);doc.setTextColor(...CHARCOAL);doc.text(reasonLines,20,fiy+1);fiy+=reasonLines.length*4.5+4;}
-        if(hasEvidence){doc.setFillColor(...VANTA);doc.roundedRect(20,fiy,170,evidenceLines.length*4.5+9,2,2,"F");doc.setTextColor(...PK);doc.setFont("helvetica","bold");doc.setFontSize(7);doc.setCharSpace(0.5);doc.text("EVIDENCE FOUND IN CODE",24,fiy+5);doc.setCharSpace(0);doc.setTextColor(240,237,234);doc.setFont("helvetica","normal");doc.setFontSize(7.5);doc.text(evidenceLines,24,fiy+10);fiy+=evidenceLines.length*4.5+12;}
-        if(f.location&&f.location.trim()){doc.setTextColor(120,115,115);doc.setFont("helvetica","italic");doc.setFontSize(7.5);doc.text("Location: "+f.location,20,fiy+1);}
-        fy+=blockH+5;doc.setDrawColor(220,216,212);doc.setLineWidth(0.2);doc.line(14,fy-2,196,fy-2);
-      });fy+=6;
-    });foot();
+      (ps.findings||[]).forEach(function(f) {
+        var fColor = f.level==="ok"?GREEN:f.level==="err"?RED:f.level==="warn"?ORANGE:[180,180,180];
+        var hasEv = !!(f.evidence&&f.evidence.trim()), hasRe = !!(f.reason&&f.reason.trim());
+        var evLines = hasEv?doc.splitTextToSize(f.evidence.trim().slice(0,220),158):[];
+        var reLines = hasRe?doc.splitTextToSize(f.reason.trim(),158):[];
+        var blockH = 10+(hasRe?reLines.length*4.5+4:0)+(hasEv?evLines.length*4.5+14:0)+(f.location?6:0);
+        if (fy+blockH>H-16) { doc.addPage(); foot(); fy=20; }
+        var bgColor = f.level==="err"?[253,236,234]:f.level==="warn"?[255,248,225]:f.level==="ok"?[230,244,234]:[248,248,248];
+        doc.setFillColor.apply(doc,bgColor); doc.roundedRect(14,fy-2,182,blockH,2,2,"F");
+        doc.setFillColor.apply(doc,fColor); doc.roundedRect(14,fy-2,3,blockH,0,0,"F");
+        doc.setTextColor.apply(doc,VANTA); doc.setFont("helvetica","bold"); doc.setFontSize(8.5); doc.setCharSpace(0);
+        var tl = doc.splitTextToSize(f.text||"",164); doc.text(tl,20,fy+4);
+        var fiy = fy+4+tl.length*5;
+        if (hasRe) { doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor.apply(doc,CHARCOAL); doc.text(reLines,20,fiy+1); fiy+=reLines.length*4.5+4; }
+        if (hasEv) {
+          doc.setFillColor.apply(doc,VANTA); doc.roundedRect(20,fiy,170,evLines.length*4.5+9,2,2,"F");
+          doc.setTextColor.apply(doc,PK); doc.setFont("helvetica","bold"); doc.setFontSize(7); doc.setCharSpace(0.5); doc.text("EVIDENCE FOUND IN CODE",24,fiy+5);
+          doc.setCharSpace(0); doc.setTextColor(240,237,234); doc.setFont("helvetica","normal"); doc.setFontSize(7.5); doc.text(evLines,24,fiy+10);
+          fiy+=evLines.length*4.5+12;
+        }
+        if (f.location&&f.location.trim()) { doc.setTextColor(120,115,115); doc.setFont("helvetica","italic"); doc.setFontSize(7.5); doc.text("Location: "+f.location,20,fiy+1); }
+        fy+=blockH+5; doc.setDrawColor(220,216,212); doc.setLineWidth(0.2); doc.line(14,fy-2,196,fy-2);
+      });
+      fy+=6;
+    });
+    foot();
   });
   // Sign-off
-  doc.addPage();doc.setFillColor(...VANTA);doc.rect(0,0,W,36,"F");doc.setFillColor(...PK);doc.rect(0,0,W,4,"F");doc.setTextColor(...WHITE);doc.setFont("helvetica","bold");doc.setFontSize(16);doc.setCharSpace(1);doc.text("SIGN-OFF & APPROVAL",14,23);doc.setCharSpace(0);
-  doc.setFillColor(...vColor);doc.roundedRect(14,44,80,20,3,3,"F");doc.setTextColor(...(verdict==="CONDITIONAL"?VANTA:WHITE));doc.setFont("helvetica","bold");doc.setFontSize(18);doc.setCharSpace(2);doc.text(verdict,54,57,{align:"center"});doc.setCharSpace(0);
-  doc.setTextColor(...CHARCOAL);doc.setFontSize(10);doc.setFont("helvetica","normal");doc.text(`Score: ${score}/100 — ${score>=80?"Strong security posture.":score>=50?"Review required before deployment.":"Critical issues must be resolved."}`,14,76);
-  let sfy=92;[["Project Owner",auditMeta.owner||"__________________________"],["Security Reviewer","__________________________"],["Date",auditMeta.date||"__________________________"],["Approved for Deployment","Yes  /  No  /  Conditional"]].forEach(([label,value])=>{doc.setFillColor(...CLOUD);doc.rect(14,sfy,182,14,"F");doc.setTextColor(...CHARCOAL);doc.setFont("helvetica","bold");doc.setFontSize(8);doc.setCharSpace(0.5);doc.text(label.toUpperCase(),18,sfy+6);doc.setFont("helvetica","normal");doc.setFontSize(10);doc.setCharSpace(0);doc.setTextColor(...VANTA);doc.text(value,18,sfy+12);sfy+=18;});
-  doc.setTextColor(...CHARCOAL);doc.setFontSize(8);doc.text("This report was generated by the Huda Beauty Security Audit Tool. All findings must be reviewed",14,sfy+12);doc.text("by the project owner and security team before any deployment to production.",14,sfy+18);foot();
-  doc.save(`HB_SecurityAudit_${(auditMeta.project||"Report").replace(/\s+/g,"_")}_${new Date().toISOString().slice(0,10)}.pdf`);
+  doc.addPage(); doc.setFillColor.apply(doc,VANTA); doc.rect(0,0,W,36,"F"); doc.setFillColor.apply(doc,PK); doc.rect(0,0,W,4,"F");
+  doc.setTextColor.apply(doc,WHITE); doc.setFont("helvetica","bold"); doc.setFontSize(16); doc.setCharSpace(1); doc.text("SIGN-OFF & APPROVAL",14,23); doc.setCharSpace(0);
+  doc.setFillColor.apply(doc,vColor); doc.roundedRect(14,44,80,20,3,3,"F");
+  doc.setTextColor.apply(doc,verdict==="CONDITIONAL"?VANTA:WHITE); doc.setFont("helvetica","bold"); doc.setFontSize(18); doc.setCharSpace(2); doc.text(verdict,54,57,{align:"center"}); doc.setCharSpace(0);
+  doc.setTextColor.apply(doc,CHARCOAL); doc.setFontSize(10); doc.setFont("helvetica","normal");
+  doc.text("Score: "+score+"/100 — "+(score>=80?"Strong security posture.":score>=50?"Review required before deployment.":"Critical issues must be resolved."),14,76);
+  var sfy=92;
+  [["Project Owner",auditMeta.owner||"__________________________"],["Security Reviewer","__________________________"],["Date",auditMeta.date||"__________________________"],["Approved for Deployment","Yes  /  No  /  Conditional"]].forEach(function(kv) {
+    doc.setFillColor.apply(doc,CLOUD); doc.rect(14,sfy,182,14,"F");
+    doc.setTextColor.apply(doc,CHARCOAL); doc.setFont("helvetica","bold"); doc.setFontSize(8); doc.setCharSpace(0.5); doc.text(kv[0].toUpperCase(),18,sfy+6);
+    doc.setFont("helvetica","normal"); doc.setFontSize(10); doc.setCharSpace(0); doc.setTextColor.apply(doc,VANTA); doc.text(kv[1],18,sfy+12); sfy+=18;
+  });
+  doc.setTextColor.apply(doc,CHARCOAL); doc.setFontSize(8);
+  doc.text("This report was generated by the Huda Beauty Security Audit Tool. All findings must be reviewed",14,sfy+12);
+  doc.text("by the project owner and security team before any deployment to production.",14,sfy+18);
+  foot();
+  doc.save("HB_SecurityAudit_" + (auditMeta.project||"Report").replace(/\s+/g,"_") + "_" + new Date().toISOString().slice(0,10) + ".pdf");
 }
 </script>
 </body>
