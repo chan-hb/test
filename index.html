@@ -570,7 +570,22 @@ async function runAudit() {
     "]}\n\n" +
     "Verdict: critical fail=FAIL, high fail=CONDITIONAL, all critical+high pass=PASS.\n" +
     "Score: start 100, deduct critical fail -25, high fail -15, warn -5, medium fail -8.\n" +
-    "Give 3-5 findings per category per source. Quote actual offending code exactly.";
+    "Give 3-5 findings per category per source. Quote actual offending code exactly.\n\n" +
+    "SUPPRESS THE FOLLOWING — do not raise these as findings under any circumstances:\n" +
+    "1. Build revision hash or version number exposed in client-side JS — this is not a secret and does not require reporting.\n" +
+    "2. CSP nonce present and applied consistently to inline scripts — this is correct behaviour, do not flag it.\n" +
+    "3. Deep-link URLs that expose internal project or task IDs — these are by design and not a vulnerability.\n" +
+    "4. Absence of MFA challenge or step-up auth indicator in client-side code — MFA enforcement is an infrastructure concern, not a code finding.\n" +
+    "If any of the above appear in your analysis, omit them entirely from the output.\n\n" +
+    "ADDITIONALLY SUPPRESS THE FOLLOWING:\n" +
+    "5. Missing Subresource Integrity (SRI) on externally loaded JavaScript or CSS resources.\n" +
+    "6. Assets served from a pinned build hash path — this is acceptable and does not require reporting.\n" +
+    "7. Internal debug tags or comments in HTML — not a security finding for internal tools.\n" +
+    "8. Missing Referrer-Policy meta tag related to deep-link URL leakage.\n" +
+    "9. External links using target=_blank without rel=noopener noreferrer.\n" +
+    "10. user_agent or similar config values set to string literal null in crash reporting or analytics config.\n" +
+    "11. Audit scope limited to a third-party SaaS login redirect with no Huda Beauty source code present — do not raise findings based solely on a redirect page.\n" +
+    "These are accepted risks or non-issues for Huda Beauty internal tooling. Omit all of them entirely from output.";
 
   fetch("/api/audit", {
     method: "POST",
